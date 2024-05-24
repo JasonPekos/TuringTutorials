@@ -145,7 +145,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Tutorials</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://turinglang.org/news/"> 
+    <a class="nav-link" href="https://turinglang.org/library/"> 
 <span class="menu-text">Library API</span></a>
   </li>  
   <li class="nav-item">
@@ -169,7 +169,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Documentation</li><li class="breadcrumb-item"><a href="../../tutorials/docs-00-getting-started/index.html">Using Turing</a></li><li class="breadcrumb-item"><a href="../../tutorials/docs-14-using-turing-quick-start/index.html">Quick Start</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../tutorials/docs-00-getting-started/index.html">Documentation</a></li><li class="breadcrumb-item"><a href="../../tutorials/docs-00-getting-started/index.html">Using Turing</a></li><li class="breadcrumb-item"><a href="../../tutorials/docs-14-using-turing-quick-start/index.html">Quick Start</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -192,7 +192,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+            <a href="../../tutorials/docs-00-getting-started/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Using Turing</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -442,7 +442,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Documentation</li><li class="breadcrumb-item"><a href="../../tutorials/docs-00-getting-started/index.html">Using Turing</a></li><li class="breadcrumb-item"><a href="../../tutorials/docs-14-using-turing-quick-start/index.html">Quick Start</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../tutorials/docs-00-getting-started/index.html">Documentation</a></li><li class="breadcrumb-item"><a href="../../tutorials/docs-00-getting-started/index.html">Using Turing</a></li><li class="breadcrumb-item"><a href="../../tutorials/docs-14-using-turing-quick-start/index.html">Quick Start</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Probabilistic Programming in Thirty Seconds</h1>
 </div>
@@ -462,8 +462,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>If you are already well-versed in probabilistic programming and want to take a quick look at how Turing’s syntax works or otherwise just want a model to start with, we have provided a complete Bayesian coin-flipping model below.</p>
-<p>This example can be run wherever you have Julia installed (see <a href="https://turinglang.org/docs//dev/docs/using-turing/getting-started/">Getting Started</a>, but you will need to install the packages <code>Turing</code> and <code>StatsPlots</code> if you have not done so already.</p>
-<p>This is an excerpt from a more formal example which can be found in the documentation website <a href="https://turinglang.org/docs//dev/docs/tutorials/introduction/">here</a>.</p>
+<p>This example can be run wherever you have Julia installed (see <a href="https://turinglang.org//dev/docs/using-turing/getting-started/">Getting Started</a>, but you will need to install the packages <code>Turing</code> and <code>StatsPlots</code> if you have not done so already.</p>
+<p>This is an excerpt from a more formal example which can be found in the documentation website <a href="https://turinglang.org//dev/docs/tutorials/introduction/">here</a>.</p>
 <section id="import-libraries" class="level2">
 <h2 class="anchored" data-anchor-id="import-libraries">Import Libraries</h2>
 <div id="4" class="cell" data-execution_count="1">
@@ -767,7 +767,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/turinglang\.org\/docs\/");
+      var filterRegex = new RegExp("https:\/\/turinglang\.org\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -1097,8 +1097,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../tutorials/docs-00-getting-started/index.html" class="pagination-link" aria-label="Getting Started">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Getting Started</span>
+      <a href="../../tutorials/docs-00-getting-started/index.html" class="pagination-link" aria-label="Using Turing">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Using Turing</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
