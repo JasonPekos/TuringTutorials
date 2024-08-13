@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.56">
+<meta name="generator" content="quarto-1.6.4">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../tutorials/00-introduction/index.html" rel="next">
+<link href="../../tutorials/docs-05-for-developers-compiler/index.html" rel="next">
 <link href="../../tutorials/docs-15-using-turing-sampler-viz/index.html" rel="prev">
 <link href="../../assets/favicon.ico" rel="icon">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
@@ -146,7 +146,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="https://turinglang.org/library/"> 
-<span class="menu-text">Libraries</span></a>
+<span class="menu-text">Library API</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="https://turinglang.org/news/"> 
@@ -156,23 +156,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link" href="https://turinglang.org/team/"> 
 <span class="menu-text">Team</span></a>
   </li>  
-</ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-v0.33" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">v0.33</span>
-    </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-v0.33">    
-        <li>
-    <a class="dropdown-item" href="https://turinglang.org/docs/changelog.html">
- <span class="dropdown-text">Changelog</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="https://turinglang.org/docs/versions.html">
- <span class="dropdown-text">All Versions</span></a>
-  </li>  
-    </ul>
-  </li>
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -186,7 +169,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Documentation</li><li class="breadcrumb-item"><a href="../../tutorials/docs-00-getting-started/index.html">Using Turing - Modelling Syntax and Interface</a></li><li class="breadcrumb-item"><a href="../../tutorials/docs-16-using-turing-external-samplers/index.html">External Samplers</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../tutorials/docs-00-getting-started/index.html">Documentation</a></li><li class="breadcrumb-item"><a href="../../tutorials/docs-00-getting-started/index.html">Using Turing</a></li><li class="breadcrumb-item"><a href="../../tutorials/docs-16-using-turing-external-samplers/index.html">External Samplers</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -209,8 +192,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Using Turing - Modelling Syntax and Interface</span></a>
+            <a href="../../tutorials/docs-00-getting-started/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using Turing</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -232,12 +215,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../../tutorials/docs-12-using-turing-guide/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Guide</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../tutorials/docs-17-mode-estimation/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Mode Estimation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -281,12 +258,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
- <span class="menu-text">Using Turing - Tutorials</span></a>
+ <span class="menu-text">For Developers</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/docs-05-for-developers-compiler/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Turing Compiler Design</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/docs-06-for-developers-interface/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Interface Guide</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/docs-04-for-developers-abstractmcmc-turing/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How Turing implements AbstractMCMC</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/docs-07-for-developers-variational-inference/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variational Inference</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Tutorials</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../tutorials/00-introduction/index.html" class="sidebar-item-text sidebar-link">
@@ -361,33 +373,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../tutorials/12-gplvm/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Gaussian Process LVM</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../tutorials/13-seasonal-time-series/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bayesian Time Series Analysis</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../tutorials/15-gaussian-processes/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction to Gaussian Processes</span></a>
+  <a href="../../tutorials/14-minituring/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A Mini Turing Compiler</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../tutorials/12-gplvm/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Gaussian Process Latent Variable Models</span></a>
+  <a href="../../tutorials/15-gaussian-processes/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Intro to Gaussian Processes</span></a>
   </div>
 </li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
- <span class="menu-text">For Developers (PPL)</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Contributing</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../tutorials/docs-01-contributing-guide/index.html" class="sidebar-item-text sidebar-link">
@@ -396,55 +414,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../tutorials/docs-05-for-developers-compiler/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Turing Compiler Design</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../tutorials/14-minituring/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">A Mini Turing Implementation I: Compiler</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../tutorials/16-contexts/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">A Mini Turing Implementation II: Contexts</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../tutorials/docs-06-for-developers-interface/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Interface Guide</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
- <span class="menu-text">For Developers (Inference)</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../tutorials/docs-04-for-developers-abstractmcmc-turing/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">How Turing implements AbstractMCMC</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../tutorials/docs-07-for-developers-variational-inference/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Variational Inference</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../tutorials/docs-17-implementing-samplers/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Implementing Samplers</span></a>
+  <a href="../../tutorials/docs-02-contributing-style-guide/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Style Guide</span></a>
   </div>
 </li>
       </ul>
@@ -465,12 +436,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#going-beyond-the-turing-api" id="toc-going-beyond-the-turing-api" class="nav-link" data-scroll-target="#going-beyond-the-turing-api">Going beyond the Turing API</a></li>
   <li><a href="#using-new-inference-methods" id="toc-using-new-inference-methods" class="nav-link" data-scroll-target="#using-new-inference-methods">Using new inference methods</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/TuringLang/docs/edit/master/tutorials/docs-16-using-turing-external-samplers/index.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/TuringLang/docs/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/TuringLang/TuringTutorials/edit/master/tutorials/docs-16-using-turing-external-samplers/index.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/TuringLang/TuringTutorials/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Documentation</li><li class="breadcrumb-item"><a href="../../tutorials/docs-00-getting-started/index.html">Using Turing - Modelling Syntax and Interface</a></li><li class="breadcrumb-item"><a href="../../tutorials/docs-16-using-turing-external-samplers/index.html">External Samplers</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../tutorials/docs-00-getting-started/index.html">Documentation</a></li><li class="breadcrumb-item"><a href="../../tutorials/docs-00-getting-started/index.html">Using Turing</a></li><li class="breadcrumb-item"><a href="../../tutorials/docs-16-using-turing-external-samplers/index.html">External Samplers</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Using External Sampler</h1>
 </div>
@@ -539,8 +510,8 @@ dim: 10
 Iterations        = 1:1:10000
 Number of chains  = 1
 Samples per chain = 10000
-Wall duration     = 3.99 seconds
-Compute duration  = 3.99 seconds
+Wall duration     = 4.25 seconds
+Compute duration  = 4.25 seconds
 parameters        = θ, z[1], z[2], z[3], z[4], z[5], z[6], z[7], z[8], z[9]
 internals         = lp
 
@@ -548,32 +519,32 @@ Summary Statistics
   parameters      mean       std      mcse   ess_bulk   ess_tail      rhat   e ⋯
       Symbol   Float64   Float64   Float64    Float64    Float64   Float64     ⋯
 
-           θ   -0.6798    0.9590    0.1734    31.9222    31.6086    1.1238     ⋯
-        z[1]    0.7771    0.5823    0.0663    67.0987   132.5357    1.0650     ⋯
-        z[2]   -0.2595    0.6526    0.0858    53.2982    98.6385    1.0286     ⋯
-        z[3]   -0.2482    0.6034    0.0561    98.4748    79.1198    1.2764     ⋯
-        z[4]    0.0249    0.6066    0.0726    70.5466    79.9804    1.1841     ⋯
-        z[5]    0.1716    0.6000    0.0802    59.6889    70.4003    1.2128     ⋯
-        z[6]   -0.9346    0.7847    0.1146    44.9027    28.2901    1.3541     ⋯
-        z[7]   -0.0394    0.5550    0.0686    68.5791    43.0388    1.3625     ⋯
-        z[8]   -0.3464    0.5946    0.0756    56.2313   139.5905    1.0467     ⋯
-        z[9]   -0.0076    0.5723    0.0549   101.5199   101.4090    1.1587     ⋯
+           θ    1.5341    0.5613    0.0403   194.9102   324.1185    1.0030     ⋯
+        z[1]   -0.7445    0.8940    0.0579   235.3580   334.9181    1.0022     ⋯
+        z[2]    0.1199    0.9108    0.0595   236.9436   337.2985    1.0058     ⋯
+        z[3]    3.7690    1.0517    0.0850   150.0159   166.5934    1.0034     ⋯
+        z[4]   -0.6982    0.9241    0.0727   162.0935   261.5074    1.0027     ⋯
+        z[5]    1.0214    0.9230    0.0688   185.9479   314.4082    1.0201     ⋯
+        z[6]    1.6799    0.9884    0.0721   190.2560   325.5384    1.0005     ⋯
+        z[7]    3.1222    0.9610    0.0738   167.8925   177.3150    1.0038     ⋯
+        z[8]   -0.9955    0.9480    0.0701   183.5464   197.0536    1.0048     ⋯
+        z[9]    1.3564    0.9562    0.0684   192.6429   346.9163    1.0015     ⋯
                                                                 1 column omitted
 
 Quantiles
   parameters      2.5%     25.0%     50.0%     75.0%     97.5%
       Symbol   Float64   Float64   Float64   Float64   Float64
 
-           θ   -1.8828   -1.5103   -0.8245    0.0970    1.3731
-        z[1]   -0.5007    0.5003    0.6055    1.1507    2.1445
-        z[2]   -1.8630   -0.4517   -0.3654    0.0768    1.0909
-        z[3]   -1.5502   -0.4600   -0.2921   -0.0003    0.9953
-        z[4]   -1.1308   -0.2377    0.0322    0.2171    1.4558
-        z[5]   -0.8071   -0.1118   -0.1118    0.5737    1.6138
-        z[6]   -2.6719   -1.2916   -0.6609   -0.6609    0.6368
-        z[7]   -1.2612   -0.4907    0.0734    0.1388    1.1084
-        z[8]   -1.7711   -0.6682   -0.2468    0.0647    0.5638
-        z[9]   -1.2986   -0.3203    0.1048    0.1840    1.2623</code></pre>
+           θ    0.5224    1.1099    1.5545    1.9282    2.6738
+        z[1]   -2.4815   -1.4137   -0.6882   -0.1236    0.9907
+        z[2]   -1.7954   -0.5099    0.1862    0.7169    1.8198
+        z[3]    1.7790    3.1538    3.7751    4.4993    5.8374
+        z[4]   -2.5437   -1.3019   -0.6521   -0.0534    0.9666
+        z[5]   -0.7223    0.3748    1.0143    1.6389    2.8187
+        z[6]    0.0695    0.9868    1.6183    2.3696    3.7505
+        z[7]    1.3824    2.4726    3.1030    3.8063    4.9534
+        z[8]   -2.8273   -1.6107   -1.0064   -0.3533    0.7531
+        z[9]   -0.5331    0.7397    1.3957    1.9816    3.3499</code></pre>
 </div>
 </div>
 </section>
@@ -600,11 +571,9 @@ Quantiles
 <span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample</span></span>
 <span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>chain <span class="op">=</span> <span class="fu">sample</span>(model, <span class="fu">externalsampler</span>(nuts), <span class="fl">10_000</span>; n_adapts<span class="op">=</span><span class="fl">1_000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>┌ Warning: 1 (1.8%) updates to the inverse Hessian estimate were rejected to keep it positive definite.
-└ @ Pathfinder ~/.julia/packages/Pathfinder/p5Vuk/src/singlepath.jl:213
-┌ Warning: Pareto shape k = 0.92 &gt; 0.7. Resulting importance sampling estimates are likely to be unstable.
-└ @ PSIS ~/.julia/packages/PSIS/jwznT/src/core.jl:314
-[ Info: Found initial step size 2.9802322387695314e-9</code></pre>
+<pre><code>┌ Warning: Pareto shape k = 2.5 &gt; 1. Corresponding importance sampling estimates are likely to be unstable and are unlikely to converge with additional samples.
+└ @ PSIS ~/.julia/packages/PSIS/jwznT/src/core.jl:312
+[ Info: Found initial step size 3.2</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="1">
 <pre><code>Chains MCMC chain (10000×23×1 Array{Float64, 3}):
@@ -612,8 +581,8 @@ Quantiles
 Iterations        = 1:1:10000
 Number of chains  = 1
 Samples per chain = 10000
-Wall duration     = 7.34 seconds
-Compute duration  = 7.34 seconds
+Wall duration     = 5.72 seconds
+Compute duration  = 5.72 seconds
 parameters        = θ, z[1], z[2], z[3], z[4], z[5], z[6], z[7], z[8], z[9]
 internals         = lp, n_steps, is_accept, acceptance_rate, log_density, hamiltonian_energy, hamiltonian_energy_error, max_hamiltonian_energy_error, tree_depth, numerical_error, step_size, nom_step_size, is_adapt
 
@@ -621,32 +590,32 @@ Summary Statistics
   parameters      mean       std      mcse     ess_bulk    ess_tail      rhat  ⋯
       Symbol   Float64   Float64   Float64      Float64     Float64   Float64  ⋯
 
-           θ   -0.5581    1.0495    0.0233    2066.9958   1582.6917    1.0000  ⋯
-        z[1]    0.8003    0.7924    0.0245     806.9814    217.3224    1.0007  ⋯
-        z[2]   -0.2511    0.6342    0.0068    9385.5363   6554.3797    0.9999  ⋯
-        z[3]   -0.2726    0.6502    0.0097    3500.1787   6169.0706    1.0001  ⋯
-        z[4]    0.0861    0.6313    0.0106    3072.9023   6371.9797    1.0003  ⋯
-        z[5]    0.3406    0.6322    0.0076    7479.1064   6254.2050    1.0003  ⋯
-        z[6]   -1.1633    0.8802    0.0219    1940.2649   6695.7388    1.0004  ⋯
-        z[7]   -0.0434    0.6148    0.0068    8403.4168   5912.9572    1.0012  ⋯
-        z[8]   -0.5028    0.6718    0.0083    7092.1595   6774.9170    1.0001  ⋯
-        z[9]   -0.0526    0.6274    0.0060   11104.4787   6621.7483    1.0004  ⋯
+           θ    1.4554    0.5800    0.0082    4839.6078   2570.5288    1.0006  ⋯
+        z[1]   -0.6325    0.8949    0.0081   12366.8161   6821.5075    1.0001  ⋯
+        z[2]    0.0230    0.9038    0.0078   13390.1027   7497.8238    1.0001  ⋯
+        z[3]    3.7304    0.9823    0.0098   10012.2618   6532.9181    1.0006  ⋯
+        z[4]   -0.6793    0.9005    0.0085   11158.8777   7344.4035    0.9999  ⋯
+        z[5]    0.9127    0.9145    0.0083   12117.5944   7842.7919    1.0001  ⋯
+        z[6]    1.6874    0.9205    0.0092   10012.2278   7953.3580    1.0001  ⋯
+        z[7]    3.1273    0.9691    0.0099    9536.4286   7545.4005    1.0008  ⋯
+        z[8]   -0.9566    0.8871    0.0085   10800.6767   7674.6865    0.9999  ⋯
+        z[9]    1.3203    0.9166    0.0093    9756.6495   7037.1814    0.9999  ⋯
                                                                 1 column omitted
 
 Quantiles
   parameters      2.5%     25.0%     50.0%     75.0%     97.5%
       Symbol   Float64   Float64   Float64   Float64   Float64
 
-           θ   -2.7120   -1.2787   -0.4699    0.2072    1.2959
-        z[1]   -0.5715    0.2422    0.6927    1.2819    2.5932
-        z[2]   -1.6020   -0.6252   -0.2019    0.1515    0.9546
-        z[3]   -1.6898   -0.6577   -0.2225    0.1498    0.9109
-        z[4]   -1.1200   -0.3021    0.0670    0.4632    1.4046
-        z[5]   -0.7856   -0.0682    0.2738    0.7171    1.7246
-        z[6]   -3.0428   -1.7289   -1.0439   -0.4777    0.2137
-        z[7]   -1.3300   -0.4069   -0.0261    0.3250    1.1999
-        z[8]   -2.0389   -0.8874   -0.4211   -0.0482    0.6385
-        z[9]   -1.3655   -0.4161   -0.0355    0.3211    1.2172</code></pre>
+           θ    0.2955    1.0692    1.4565    1.8404    2.6172
+        z[1]   -2.3922   -1.2237   -0.6284   -0.0424    1.1334
+        z[2]   -1.7285   -0.5920    0.0224    0.6367    1.7988
+        z[3]    1.8062    3.0660    3.7253    4.3868    5.6781
+        z[4]   -2.4405   -1.2732   -0.6910   -0.0698    1.0607
+        z[5]   -0.8541    0.2912    0.9089    1.5290    2.7208
+        z[6]   -0.1081    1.0639    1.6797    2.2976    3.4833
+        z[7]    1.2459    2.4671    3.1246    3.7865    5.0493
+        z[8]   -2.7119   -1.5430   -0.9571   -0.3663    0.7820
+        z[9]   -0.4679    0.6845    1.3149    1.9327    3.1534</code></pre>
 </div>
 </div>
 </section>
@@ -667,16 +636,16 @@ Quantiles
 <pre><code>[ Info: Tuning eps ⏳
 [ Info: Tuning L ⏳
 [ Info: Tuning sigma ⏳
-Tuning:   0%|▏                                          |  ETA: 0:08:33
-  ϵ:     1.3755467648615078
+Tuning:   0%|▏                                          |  ETA: 0:08:42
+  ϵ:     1.1604104738569856
   L:     3.1622776601683795
-  dE/d:  -0.02473466122672576
+  dE/d:  -0.051742271952041105
 
 
 Tuning: 100%|███████████████████████████████████████████| Time: 0:00:02
-  ϵ:     0.8873781245515907
-  L:     0.6286754860851295
-  dE/d:  -0.01716810362231307</code></pre>
+  ϵ:     1.7655266704570785
+  L:     1.556669230367361
+  dE/d:  0.03180680517612657</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="1">
 <pre><code>Chains MCMC chain (10000×11×1 Array{Float64, 3}):
@@ -684,41 +653,41 @@ Tuning: 100%|██████████████████████�
 Iterations        = 1:1:10000
 Number of chains  = 1
 Samples per chain = 10000
-Wall duration     = 5.51 seconds
-Compute duration  = 5.51 seconds
+Wall duration     = 5.61 seconds
+Compute duration  = 5.61 seconds
 parameters        = θ, z[1], z[2], z[3], z[4], z[5], z[6], z[7], z[8], z[9]
 internals         = lp
 
 Summary Statistics
-  parameters      mean       std      mcse   ess_bulk   ess_tail      rhat   e ⋯
-      Symbol   Float64   Float64   Float64    Float64    Float64   Float64     ⋯
+  parameters      mean       std      mcse    ess_bulk    ess_tail      rhat   ⋯
+      Symbol   Float64   Float64   Float64     Float64     Float64   Float64   ⋯
 
-           θ   -0.4144    1.0817    0.0900   149.3565   379.6971    1.0017     ⋯
-        z[1]    0.8803    0.7546    0.0497   241.8758   466.3343    1.0000     ⋯
-        z[2]   -0.1624    0.6843    0.0662   110.1171   145.8678    1.0019     ⋯
-        z[3]   -0.3537    0.6469    0.0478   187.3961   233.9165    1.0304     ⋯
-        z[4]    0.0721    0.6821    0.0631   118.8528   195.2001    1.0065     ⋯
-        z[5]    0.4073    0.6868    0.0664   110.7404   184.5383    1.0028     ⋯
-        z[6]   -1.2755    0.9044    0.0715   157.4962   485.9078    1.0007     ⋯
-        z[7]   -0.0138    0.6899    0.0734    96.2397    89.4613    1.0092     ⋯
-        z[8]   -0.4751    0.6596    0.0498   183.9754   364.1971    1.0068     ⋯
-        z[9]   -0.0554    0.6628    0.0651   107.1455   194.1838    1.0044     ⋯
+           θ    1.4425    0.5886    0.0199    833.2424    861.6275    1.0000   ⋯
+        z[1]   -0.6357    0.9186    0.0224   1684.5839   2945.2715    1.0007   ⋯
+        z[2]    0.0327    0.9117    0.0250   1334.1792   2493.9342    1.0010   ⋯
+        z[3]    3.6842    0.9988    0.0276   1309.1601   2804.2440    1.0004   ⋯
+        z[4]   -0.6913    0.8938    0.0237   1425.6797   2605.5499    1.0005   ⋯
+        z[5]    0.8806    0.9365    0.0261   1286.8375   2311.8854    1.0007   ⋯
+        z[6]    1.7012    0.8916    0.0279   1018.5818   2031.8290    1.0001   ⋯
+        z[7]    3.1390    0.9256    0.0292   1010.8421   1985.4926    1.0005   ⋯
+        z[8]   -0.9179    0.8868    0.0229   1497.7345   2289.0333    1.0018   ⋯
+        z[9]    1.2904    0.9022    0.0257   1251.8926   2106.7774    1.0003   ⋯
                                                                 1 column omitted
 
 Quantiles
   parameters      2.5%     25.0%     50.0%     75.0%     97.5%
       Symbol   Float64   Float64   Float64   Float64   Float64
 
-           θ   -2.7065   -1.1388   -0.2850    0.3942    1.4041
-        z[1]   -0.3577    0.3263    0.7958    1.3474    2.5814
-        z[2]   -1.6078   -0.5995   -0.1099    0.2824    1.1319
-        z[3]   -1.6726   -0.7781   -0.3110    0.0870    0.8517
-        z[4]   -1.2488   -0.3545    0.0473    0.4954    1.4689
-        z[5]   -0.8700   -0.0323    0.3485    0.7978    1.9335
-        z[6]   -3.2479   -1.8710   -1.1894   -0.5901    0.1735
-        z[7]   -1.3685   -0.4242   -0.0403    0.3544    1.5547
-        z[8]   -1.9276   -0.8763   -0.4003   -0.0176    0.6916
-        z[9]   -1.3520   -0.4661   -0.0599    0.3549    1.2920</code></pre>
+           θ    0.2501    1.0477    1.4505    1.8540    2.5497
+        z[1]   -2.4771   -1.2360   -0.6291   -0.0238    1.1794
+        z[2]   -1.7078   -0.5929    0.0402    0.6517    1.7959
+        z[3]    1.7476    3.0014    3.6583    4.3567    5.6445
+        z[4]   -2.4349   -1.2914   -0.6933   -0.0928    1.0790
+        z[5]   -0.9547    0.2564    0.8854    1.4984    2.7358
+        z[6]   -0.0193    1.0998    1.6892    2.2941    3.4713
+        z[7]    1.3499    2.5152    3.1309    3.7492    4.9948
+        z[8]   -2.6442   -1.5222   -0.9202   -0.3240    0.8464
+        z[9]   -0.4379    0.6854    1.2780    1.8875    3.1013</code></pre>
 </div>
 </div>
 <p>The only requirement to work with <code>externalsampler</code> is that the provided <code>sampler</code> must implement the AbstractMCMC.jl-interface [INSERT LINK] for a <code>model</code> of type <code>AbstractMCMC.LogDensityModel</code> [INSERT LINK].</p>
@@ -1205,8 +1174,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../tutorials/00-introduction/index.html" class="pagination-link" aria-label="Introduction to Turing">
-        <span class="nav-page-text">Introduction to Turing</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../tutorials/docs-05-for-developers-compiler/index.html" class="pagination-link" aria-label="Turing Compiler Design">
+        <span class="nav-page-text">Turing Compiler Design</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1218,7 +1187,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/TuringLang/docs/edit/master/tutorials/docs-16-using-turing-external-samplers/index.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/TuringLang/docs/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/TuringLang/TuringTutorials/edit/master/tutorials/docs-16-using-turing-external-samplers/index.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/TuringLang/TuringTutorials/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
