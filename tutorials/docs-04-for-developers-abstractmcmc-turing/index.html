@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.39">
+<meta name="generator" content="quarto-1.5.56">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Turing.jl – How Turing implements AbstractMCMC</title>
+<title>How Turing implements AbstractMCMC – Turing.jl</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -112,6 +112,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 </style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../theming/styles.css">
 </head>
@@ -146,7 +175,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="https://turinglang.org/library/"> 
-<span class="menu-text">Library API</span></a>
+<span class="menu-text">Libraries</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="https://turinglang.org/news/"> 
@@ -156,6 +185,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link" href="https://turinglang.org/team/"> 
 <span class="menu-text">Team</span></a>
   </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-v0.33" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">v0.33</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-v0.33">    
+        <li>
+    <a class="dropdown-item" href="https://turinglang.org/docs/changelog.html">
+ <span class="dropdown-text">Changelog</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://turinglang.org/docs/versions.html">
+ <span class="dropdown-text">All Versions</span></a>
+  </li>  
+    </ul>
+  </li>
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -169,7 +215,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../tutorials/docs-00-getting-started/index.html">Documentation</a></li><li class="breadcrumb-item"><a href="../../tutorials/docs-05-for-developers-compiler/index.html">For Developers</a></li><li class="breadcrumb-item"><a href="../../tutorials/docs-04-for-developers-abstractmcmc-turing/index.html">How Turing implements AbstractMCMC</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Documentation</li><li class="breadcrumb-item"><a href="../../tutorials/docs-04-for-developers-abstractmcmc-turing/index.html">For Developers (Inference)</a></li><li class="breadcrumb-item"><a href="../../tutorials/docs-04-for-developers-abstractmcmc-turing/index.html">How Turing implements AbstractMCMC</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -192,8 +238,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../tutorials/docs-00-getting-started/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Using Turing</span></a>
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Using Turing - Modelling Syntax and Interface</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -215,6 +261,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../../tutorials/docs-12-using-turing-guide/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Guide</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/docs-17-mode-estimation/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mode Estimation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -257,48 +309,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">For Developers</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Using Turing - Tutorials</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../tutorials/docs-05-for-developers-compiler/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Turing Compiler Design</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../tutorials/docs-06-for-developers-interface/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Interface Guide</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../tutorials/docs-04-for-developers-abstractmcmc-turing/index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">How Turing implements AbstractMCMC</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../tutorials/docs-07-for-developers-variational-inference/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Variational Inference</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
- <span class="menu-text">Tutorials</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../tutorials/00-introduction/index.html" class="sidebar-item-text sidebar-link">
@@ -373,39 +390,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../tutorials/12-gplvm/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Gaussian Process LVM</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../../tutorials/13-seasonal-time-series/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bayesian Time Series Analysis</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../tutorials/14-minituring/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">A Mini Turing Compiler</span></a>
+  <a href="../../tutorials/15-gaussian-processes/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Gaussian Processes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../tutorials/15-gaussian-processes/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Intro to Gaussian Processes</span></a>
+  <a href="../../tutorials/12-gplvm/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Gaussian Process Latent Variable Models</span></a>
   </div>
 </li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
- <span class="menu-text">Contributing</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">For Developers (PPL)</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../tutorials/docs-01-contributing-guide/index.html" class="sidebar-item-text sidebar-link">
@@ -414,8 +425,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../tutorials/docs-02-contributing-style-guide/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Style Guide</span></a>
+  <a href="../../tutorials/docs-05-for-developers-compiler/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Turing Compiler Design</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/14-minituring/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A Mini Turing Implementation I: Compiler</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/16-contexts/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A Mini Turing Implementation II: Contexts</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/docs-06-for-developers-interface/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Interface Guide</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">For Developers (Inference)</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/docs-04-for-developers-abstractmcmc-turing/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">How Turing implements AbstractMCMC</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/docs-07-for-developers-variational-inference/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variational Inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/docs-17-implementing-samplers/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Implementing Samplers</span></a>
   </div>
 </li>
       </ul>
@@ -448,12 +506,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#overload-assume-and-observe" id="toc-overload-assume-and-observe" class="nav-link" data-scroll-target="#overload-assume-and-observe">3. Overload assume and observe</a></li>
   <li><a href="#summary-importance-sampling-step-by-step" id="toc-summary-importance-sampling-step-by-step" class="nav-link" data-scroll-target="#summary-importance-sampling-step-by-step">4. Summary: Importance Sampling step by step</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/TuringLang/TuringTutorials/edit/master/tutorials/docs-04-for-developers-abstractmcmc-turing/index.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/TuringLang/TuringTutorials/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/TuringLang/docs/edit/master/tutorials/docs-04-for-developers-abstractmcmc-turing/index.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/TuringLang/docs/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../tutorials/docs-00-getting-started/index.html">Documentation</a></li><li class="breadcrumb-item"><a href="../../tutorials/docs-05-for-developers-compiler/index.html">For Developers</a></li><li class="breadcrumb-item"><a href="../../tutorials/docs-04-for-developers-abstractmcmc-turing/index.html">How Turing implements AbstractMCMC</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Documentation</li><li class="breadcrumb-item"><a href="../../tutorials/docs-04-for-developers-abstractmcmc-turing/index.html">For Developers (Inference)</a></li><li class="breadcrumb-item"><a href="../../tutorials/docs-04-for-developers-abstractmcmc-turing/index.html">How Turing implements AbstractMCMC</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">How Turing implements AbstractMCMC</h1>
 </div>
@@ -492,62 +550,64 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>chn <span class="op">=</span> <span class="fu">sample</span>(mod, alg, n_samples, progress<span class="op">=</span><span class="cn">false</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="1">
-<div class="ansi-escaped-output">
-<pre>Chains MCMC chain (1000×3×1 Array{Float64, 3}):
+<pre><code>Chains MCMC chain (1000×3×1 Array{Float64, 3}):
 
-Log evidence      = -3.7123234613329705
+Log evidence      = -3.635015368958885
 Iterations        = 1:1:1000
 Number of chains  = 1
 Samples per chain = 1000
-Wall duration     = 2.05 seconds
-Compute duration  = 2.05 seconds
+Wall duration     = 2.34 seconds
+Compute duration  = 2.34 seconds
 parameters        = s², m
 internals         = lp
 
 Summary Statistics
- <span class="ansi-bold"> parameters  </span><span class="ansi-bold">    mean  </span><span class="ansi-bold">     std  </span><span class="ansi-bold">    mcse  </span><span class="ansi-bold"> ess_bulk  </span><span class="ansi-bold"> ess_tail  </span><span class="ansi-bold">    rhat  </span><span class="ansi-bold"> e ⋯
- </span><span class="ansi-bright-black-fg ansi-bold">     Symbol  </span><span class="ansi-bright-black-fg ansi-bold"> Float64  </span><span class="ansi-bright-black-fg ansi-bold"> Float64  </span><span class="ansi-bright-black-fg ansi-bold"> Float64  </span><span class="ansi-bright-black-fg ansi-bold">  Float64  </span><span class="ansi-bright-black-fg ansi-bold">  Float64  </span><span class="ansi-bright-black-fg ansi-bold"> Float64  </span><span class="ansi-bright-black-fg ansi-bold">   ⋯
+  parameters      mean       std      mcse    ess_bulk   ess_tail      rhat    ⋯
+      Symbol   Float64   Float64   Float64     Float64    Float64   Float64    ⋯
 
-          s²    2.7874    3.4779    0.1196   944.9126   886.6682    1.0010     ⋯
-           m   -0.0986    1.5393    0.0509   915.3600   908.2284    1.0001     ⋯
-</span><span class="ansi-cyan-fg ansi-bold">                                                                1 column omitted
+          s²    2.8622    4.3419    0.1328   1096.6067   983.2831    0.9993    ⋯
+           m    0.0027    1.7592    0.0551   1050.4267   896.5193    0.9992    ⋯
+                                                                1 column omitted
 
 Quantiles
- </span><span class="ansi-cyan-fg ansi-bold"> parameters  </span><span class="ansi-cyan-fg ansi-bold">    2.5%  </span><span class="ansi-cyan-fg ansi-bold">   25.0%  </span><span class="ansi-cyan-fg ansi-bold">   50.0%  </span><span class="ansi-cyan-fg ansi-bold">   75.0%  </span><span class="ansi-cyan-fg ansi-bold">   97.5%
- </span><span class="ansi-bright-black-fg ansi-bold">     Symbol  </span><span class="ansi-bright-black-fg ansi-bold"> Float64  </span><span class="ansi-bright-black-fg ansi-bold"> Float64  </span><span class="ansi-bright-black-fg ansi-bold"> Float64  </span><span class="ansi-bright-black-fg ansi-bold"> Float64  </span><span class="ansi-bright-black-fg ansi-bold"> Float64
+  parameters      2.5%     25.0%     50.0%     75.0%     97.5%
+      Symbol   Float64   Float64   Float64   Float64   Float64
 
-          s²    0.5338    1.0804    1.6989    3.1675   10.9492
-           m   -3.1936   -1.0076   -0.0925    0.8527    2.7549
-</span></pre>
+          s²    0.5176    1.1062    1.7435    2.9967   10.9393
+           m   -3.5647   -0.8705    0.0137    0.9654    3.2639</code></pre>
 </div>
 </div>
-</div>
-<p>The function <code>sample</code> is part of the AbstractMCMC interface. As explained in the <a href="https://turinglang.org/dev/docs/for-developers/interface">interface guide</a>, building a a sampling method that can be used by <code>sample</code> consists in overloading the structs and functions in <code>AbstractMCMC</code>. The interface guide also gives a standalone example of their implementation, <a href=""><code>AdvancedMH.jl</code></a>.</p>
-<p>Turing sampling methods (most of which are written <a href="https://github.com/TuringLang/Turing.jl/tree/master/src/inference">here</a>) also implement <code>AbstractMCMC</code>. Turing defines a particular architecture for <code>AbstractMCMC</code> implementations, that enables working with models defined by the <code>@model</code> macro, and uses DynamicPPL as a backend. The goal of this page is to describe this architecture, and how you would go about implementing your own sampling method in Turing, using Importance Sampling as an example. I don’t go into all the details: for instance, I don’t address selectors or parallelism.</p>
+<p>The function <code>sample</code> is part of the AbstractMCMC interface. As explained in the <a href="https://turinglang.org/dev/docs/for-developers/interface">interface guide</a>, building a sampling method that can be used by <code>sample</code> consists in overloading the structs and functions in <code>AbstractMCMC</code>. The interface guide also gives a standalone example of their implementation, <a href=""><code>AdvancedMH.jl</code></a>.</p>
+<p>Turing sampling methods (most of which are written <a href="https://github.com/TuringLang/Turing.jl/tree/master/src/mcmc">here</a>) also implement <code>AbstractMCMC</code>. Turing defines a particular architecture for <code>AbstractMCMC</code> implementations, that enables working with models defined by the <code>@model</code> macro, and uses DynamicPPL as a backend. The goal of this page is to describe this architecture, and how you would go about implementing your own sampling method in Turing, using Importance Sampling as an example. I don’t go into all the details: for instance, I don’t address selectors or parallelism.</p>
 <p>First, we explain how Importance Sampling works in the abstract. Consider the model defined in the first code block. Mathematically, it can be written:</p>
-<pre class="cell-bg"><code>\begin{align*}
-s &amp;\sim \text{InverseGamma}(2, 3), \\\\
-m &amp;\sim \text{Normal}(0, \sqrt{s}), \\\\
-x &amp;\sim \text{Normal}(m, \sqrt{s}), \\\\
+<p><span class="math display">\[
+\begin{align*}
+s &amp;\sim \text{InverseGamma}(2, 3), \\
+m &amp;\sim \text{Normal}(0, \sqrt{s}), \\
+x &amp;\sim \text{Normal}(m, \sqrt{s}), \\
 y &amp;\sim \text{Normal}(m, \sqrt{s}).
-\end{align*}</code></pre>
-<p>The <strong>latent</strong> variables are <code>s</code> and <code>m</code>, the <strong>observed</strong> variables are <code>x</code> and <code>y</code>. The model <strong>joint</strong> distribution <code>p(s,m,x,y)</code> decomposes into the <strong>prior</strong> <code>p(s,m)</code> and the <strong>likelihood</strong> <code>p(x,y \mid s,m).</code> Since <code>x = 1.5</code> and <code>y = 2</code> are observed, the goal is to infer the <strong>posterior</strong> distribution <code>p(s,m \mid x,y).</code></p>
-<p>Importance Sampling produces independent samples <code>(s_i, m_i)</code> from the prior distribution. It also outputs unnormalized weights</p>
-<pre class="cell-bg"><code>w_i = \frac {p(x,y,s_i,m_i)} {p(s_i, m_i)} = p(x,y \mid s_i, m_i)</code></pre>
+\end{align*}
+\]</span></p>
+<p>The <strong>latent</strong> variables are <span class="math inline">\(s\)</span> and <span class="math inline">\(m\)</span>, the <strong>observed</strong> variables are <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>. The model <strong>joint</strong> distribution <span class="math inline">\(p(s,m,x,y)\)</span> decomposes into the <strong>prior</strong> <span class="math inline">\(p(s,m)\)</span> and the <strong>likelihood</strong> <span class="math inline">\(p(x,y \mid s,m).\)</span> Since <span class="math inline">\(x = 1.5\)</span> and <span class="math inline">\(y = 2\)</span> are observed, the goal is to infer the <strong>posterior</strong> distribution <span class="math inline">\(p(s,m \mid x,y).\)</span></p>
+<p>Importance Sampling produces independent samples <span class="math inline">\((s_i, m_i)\)</span> from the prior distribution. It also outputs unnormalized weights</p>
+<p><span class="math display">\[
+w_i = \frac {p(x,y,s_i,m_i)} {p(s_i, m_i)} = p(x,y \mid s_i, m_i)
+\]</span></p>
 <p>such that the empirical distribution</p>
-<pre class="cell-bg"><code>\frac{1}{N} \sum_{i =1}^N \frac {w_i} {\sum_{j=1}^N w_j} \delta_{(s_i, m_i)}</code></pre>
+<p><span class="math display">\[
+\frac{1}{N} \sum_{i =1}^N \frac {w_i} {\sum_{j=1}^N w_j} \delta_{(s_i, m_i)}
+\]</span></p>
 <p>is a good approximation of the posterior.</p>
 </section>
 <section id="define-a-sampler" class="level2">
 <h2 class="anchored" data-anchor-id="define-a-sampler">1. Define a Sampler</h2>
 <p>Recall the last line of the above code block:</p>
 <div id="6" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>chn <span class="op">=</span> <span class="fu">sample</span>(mod, alg, n_samples, progress<span class="op">=</span><span class="cn">false</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>chn <span class="op">=</span> <span class="fu">sample</span>(mod, alg, n_samples, progress<span class="op">=</span><span class="cn">false</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="1">
-<div class="ansi-escaped-output">
-<pre>Chains MCMC chain (1000×3×1 Array{Float64, 3}):
+<pre><code>Chains MCMC chain (1000×3×1 Array{Float64, 3}):
 
-Log evidence      = -3.687751258122139
+Log evidence      = -3.7275028596989674
 Iterations        = 1:1:1000
 Number of chains  = 1
 Samples per chain = 1000
@@ -557,21 +617,19 @@ parameters        = s², m
 internals         = lp
 
 Summary Statistics
- <span class="ansi-bold"> parameters  </span><span class="ansi-bold">    mean  </span><span class="ansi-bold">     std  </span><span class="ansi-bold">    mcse  </span><span class="ansi-bold">  ess_bulk  </span><span class="ansi-bold"> ess_tail  </span><span class="ansi-bold">    rhat  </span><span class="ansi-bold">  ⋯
- </span><span class="ansi-bright-black-fg ansi-bold">     Symbol  </span><span class="ansi-bright-black-fg ansi-bold"> Float64  </span><span class="ansi-bright-black-fg ansi-bold"> Float64  </span><span class="ansi-bright-black-fg ansi-bold"> Float64  </span><span class="ansi-bright-black-fg ansi-bold">   Float64  </span><span class="ansi-bright-black-fg ansi-bold">  Float64  </span><span class="ansi-bright-black-fg ansi-bold"> Float64  </span><span class="ansi-bright-black-fg ansi-bold">  ⋯
+  parameters      mean       std      mcse    ess_bulk    ess_tail      rhat   ⋯
+      Symbol   Float64   Float64   Float64     Float64     Float64   Float64   ⋯
 
-          s²    2.7494    3.5942    0.1093   1040.1581   896.5193    0.9995    ⋯
-           m   -0.0113    1.5526    0.0507    939.9214   928.2536    0.9990    ⋯
-</span><span class="ansi-cyan-fg ansi-bold">                                                                1 column omitted
+          s²    2.8867    3.7711    0.1193    902.0649    973.2972    1.0002   ⋯
+           m   -0.0212    1.6314    0.0504   1028.6971   1010.3597    1.0007   ⋯
+                                                                1 column omitted
 
 Quantiles
- </span><span class="ansi-cyan-fg ansi-bold"> parameters  </span><span class="ansi-cyan-fg ansi-bold">    2.5%  </span><span class="ansi-cyan-fg ansi-bold">   25.0%  </span><span class="ansi-cyan-fg ansi-bold">   50.0%  </span><span class="ansi-cyan-fg ansi-bold">   75.0%  </span><span class="ansi-cyan-fg ansi-bold">   97.5%
- </span><span class="ansi-bright-black-fg ansi-bold">     Symbol  </span><span class="ansi-bright-black-fg ansi-bold"> Float64  </span><span class="ansi-bright-black-fg ansi-bold"> Float64  </span><span class="ansi-bright-black-fg ansi-bold"> Float64  </span><span class="ansi-bright-black-fg ansi-bold"> Float64  </span><span class="ansi-bright-black-fg ansi-bold"> Float64
+  parameters      2.5%     25.0%     50.0%     75.0%     97.5%
+      Symbol   Float64   Float64   Float64   Float64   Float64
 
-          s²    0.5311    1.1183    1.7604    2.8830   11.1220
-           m   -3.1592   -0.8545    0.0563    0.8913    3.0945
-</span></pre>
-</div>
+          s²    0.5723    1.0976    1.6997    2.9525   14.7139
+           m   -3.7290   -0.8056   -0.0140    0.8489    3.1355</code></pre>
 </div>
 </div>
 <p>Here <code>sample</code> takes as arguments a <strong>model</strong> <code>mod</code>, an <strong>algorithm</strong> <code>alg</code>, and a <strong>number of samples</strong> <code>n_samples</code>, and returns an instance <code>chn</code> of <code>Chains</code> which can be analysed using the functions in <code>MCMCChains</code>.</p>
@@ -579,7 +637,7 @@ Quantiles
 <h3 class="anchored" data-anchor-id="models">Models</h3>
 <p>To define a <strong>model</strong>, you declare a joint distribution on variables in the <code>@model</code> macro, and specify which variables are observed and which should be inferred, as well as the value of the observed variables. Thus, when implementing Importance Sampling,</p>
 <div id="8" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mod <span class="op">=</span> <span class="fu">gdemo</span>(<span class="fl">1.5</span>, <span class="fl">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mod <span class="op">=</span> <span class="fu">gdemo</span>(<span class="fl">1.5</span>, <span class="fl">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="1">
 <pre><code>DynamicPPL.Model{typeof(gdemo), (:x, :y), (), (), Tuple{Float64, Int64}, Tuple{}, DynamicPPL.DefaultContext}(Main.Notebook.gdemo, (x = 1.5, y = 2), NamedTuple(), DynamicPPL.DefaultContext())</code></pre>
 </div>
@@ -591,9 +649,9 @@ Quantiles
 <h3 class="anchored" data-anchor-id="algorithms">Algorithms</h3>
 <p>An <strong>algorithm</strong> is just a sampling method: in Turing, it is a subtype of the abstract type <code>InferenceAlgorithm</code>. Defining an algorithm may require specifying a few high-level parameters. For example, “Hamiltonian Monte-Carlo” may be too vague, but “Hamiltonian Monte Carlo with 10 leapfrog steps per proposal and a stepsize of 0.01” is an algorithm. “Metropolis-Hastings” may be too vague, but “Metropolis-Hastings with proposal distribution <code>p</code>” is an algorithm. Thus</p>
 <div id="10" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>stepsize <span class="op">=</span> <span class="fl">0.01</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> <span class="fl">10</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>alg <span class="op">=</span> <span class="fu">HMC</span>(stepsize, L)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>stepsize <span class="op">=</span> <span class="fl">0.01</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> <span class="fl">10</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>alg <span class="op">=</span> <span class="fu">HMC</span>(stepsize, L)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="1">
 <pre><code>HMC{AutoForwardDiff{nothing, Nothing}, (), AdvancedHMC.UnitEuclideanMetric}(0.01, 10, AutoForwardDiff{nothing, Nothing}(nothing))</code></pre>
 </div>
@@ -601,13 +659,13 @@ Quantiles
 <p>defines a Hamiltonian Monte-Carlo algorithm, an instance of <code>HMC</code>, which is a subtype of <code>InferenceAlgorithm</code>.</p>
 <p>In the case of Importance Sampling, there is no need to specify additional parameters:</p>
 <div id="12" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>alg <span class="op">=</span> <span class="fu">IS</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>alg <span class="op">=</span> <span class="fu">IS</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="1">
 <pre><code>IS{()}()</code></pre>
 </div>
 </div>
-<p>defines an Importance Sampling algorithm, an instance of <code>IS</code> which is a subtype of <code>InferenceAlgorithm</code>.</p>
-<p>When creating your own Turing sampling method, you must therefore build a subtype of <code>InferenceAlgorithm</code> corresponding to your method.</p>
+<p>defines an Importance Sampling algorithm, an instance of <code>IS</code>, a subtype of <code>InferenceAlgorithm</code>.</p>
+<p>When creating your own Turing sampling method, you must, therefore, build a subtype of <code>InferenceAlgorithm</code> corresponding to your method.</p>
 </section>
 <section id="samplers" class="level3">
 <h3 class="anchored" data-anchor-id="samplers">Samplers</h3>
@@ -623,11 +681,11 @@ Quantiles
 <li>a <strong>sampler constructor</strong> that uses a model and an algorithm to initialize an instance of <code>Sampler</code>. For Importance Sampling:</li>
 </ul>
 <div id="14" class="cell" data-execution_count="0">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">Sampler</span>(alg<span class="op">::</span><span class="dt">IS</span>, model<span class="op">::</span><span class="dt">Model</span>, s<span class="op">::</span><span class="dt">Selector</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    info <span class="op">=</span> <span class="fu">Dict</span><span class="dt">{Symbol,Any}</span>()</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    state <span class="op">=</span> <span class="fu">ISState</span>(model)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">Sampler</span>(alg, info, s, state)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">Sampler</span>(alg<span class="op">::</span><span class="dt">IS</span>, model<span class="op">::</span><span class="dt">Model</span>, s<span class="op">::</span><span class="dt">Selector</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    info <span class="op">=</span> <span class="fu">Dict</span><span class="dt">{Symbol,Any}</span>()</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    state <span class="op">=</span> <span class="fu">ISState</span>(model)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">Sampler</span>(alg, info, s, state)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>a <strong>state</strong> struct implementing <code>AbstractSamplerState</code> corresponding to your method: we cover this in the following paragraph.</li>
@@ -638,27 +696,31 @@ Quantiles
 <p>The <code>vi</code> field contains all the important information about sampling: first and foremost, the values of all the samples, but also the distributions from which they are sampled, the names of model parameters, and other metadata. As we will see below, many important steps during sampling correspond to queries or updates to <code>spl.state.vi</code>.</p>
 <p>By default, you can use <code>SamplerState</code>, a concrete type defined in <code>inference/Inference.jl</code>, which extends <code>AbstractSamplerState</code> and has no field except for <code>vi</code>:</p>
 <div id="16" class="cell" data-execution_count="0">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">mutable struct</span> SamplerState{VIType<span class="op">&lt;:</span><span class="dt">VarInfo</span>} <span class="op">&lt;:</span><span class="dt"> AbstractSamplerState</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    vi<span class="op">::</span><span class="dt">VIType</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">mutable struct</span> SamplerState{VIType<span class="op">&lt;:</span><span class="dt">VarInfo</span>} <span class="op">&lt;:</span><span class="dt"> AbstractSamplerState</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    vi<span class="op">::</span><span class="dt">VIType</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>When doing Importance Sampling, we care not only about the values of the samples but also their weights. We will see below that the weight of each sample is also added to <code>spl.state.vi</code>. Moreover, the average</p>
-<pre class="cell-bg"><code>\frac 1 N \sum_{j=1}^N w_i = \frac 1 N \sum_{j=1}^N p(x,y \mid s_i, m_i)</code></pre>
+<p><span class="math display">\[
+\frac 1 N \sum_{j=1}^N w_i = \frac 1 N \sum_{j=1}^N p(x,y \mid s_i, m_i)
+\]</span></p>
 <p>of the sample weights is a particularly important quantity:</p>
 <ul>
 <li>it is used to <strong>normalize</strong> the <strong>empirical approximation</strong> of the posterior distribution</li>
-<li>its logarithm is the importance sampling <strong>estimate</strong> of the <strong>log evidence</strong> <code>\log p(x, y)</code></li>
+<li>its logarithm is the importance sampling <strong>estimate</strong> of the <strong>log evidence</strong> <span class="math inline">\(\log p(x, y)\)</span></li>
 </ul>
 <p>To avoid having to compute it over and over again, <code>is.jl</code>defines an IS-specific concrete type <code>ISState</code> for sampler states, with an additional field <code>final_logevidence</code> containing</p>
-<pre class="cell-bg"><code>\log \frac 1 N \sum_{j=1}^N w_i.</code></pre>
+<p><span class="math display">\[
+\log \frac 1 N \sum_{j=1}^N w_i.
+\]</span></p>
 <div id="18" class="cell" data-execution_count="0">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">mutable struct</span> ISState{V<span class="op">&lt;:</span><span class="dt">VarInfo</span>,F<span class="op">&lt;:</span><span class="dt">AbstractFloat</span>} <span class="op">&lt;:</span><span class="dt"> AbstractSamplerState</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    vi<span class="op">::</span><span class="dt">V</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    final_logevidence<span class="op">::</span><span class="dt">F</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># additional constructor</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ISState</span>(model<span class="op">::</span><span class="dt">Model</span>) <span class="op">=</span> <span class="fu">ISState</span>(<span class="fu">VarInfo</span>(model), <span class="fl">0.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">mutable struct</span> ISState{V<span class="op">&lt;:</span><span class="dt">VarInfo</span>,F<span class="op">&lt;:</span><span class="dt">AbstractFloat</span>} <span class="op">&lt;:</span><span class="dt"> AbstractSamplerState</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    vi<span class="op">::</span><span class="dt">V</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    final_logevidence<span class="op">::</span><span class="dt">F</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># additional constructor</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ISState</span>(model<span class="op">::</span><span class="dt">Model</span>) <span class="op">=</span> <span class="fu">ISState</span>(<span class="fu">VarInfo</span>(model), <span class="fl">0.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The following diagram summarizes the hierarchy presented above.</p>
 <div class="cell" data-layout-align="default">
@@ -779,22 +841,22 @@ Quantiles
 </section>
 <section id="overload-the-functions-used-inside-mcmcsample" class="level2">
 <h2 class="anchored" data-anchor-id="overload-the-functions-used-inside-mcmcsample">2. Overload the functions used inside mcmcsample</h2>
-<p>A lot of the things here are method-specific. However Turing also has some functions that make it easier for you to implement these functions, for examples .</p>
+<p>A lot of the things here are method-specific. However, Turing also has some functions that make it easier for you to implement these functions, for example.</p>
 <section id="transitions" class="level3">
 <h3 class="anchored" data-anchor-id="transitions">Transitions</h3>
 <p><code>AbstractMCMC</code> stores information corresponding to each individual sample in objects called <code>transition</code>, but does not specify what the structure of these objects could be. You could decide to implement a type <code>MyTransition</code> for transitions corresponding to the specifics of your methods. However, there are many situations in which the only information you need for each sample is:</p>
 <ul>
-<li>its value: <code>\theta</code></li>
+<li>its value: <span class="math inline">\(\theta\)</span></li>
 <li>log of the joint probability of the observed data and this sample: <code>lp</code></li>
 </ul>
 <p><code>Inference.jl</code> <a href="https://github.com/TuringLang/Turing.jl/blob/master/src/inference/Inference.jl#L103">defines</a> a struct <code>Transition</code>, which corresponds to this default situation</p>
 <div id="20" class="cell" data-execution_count="0">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Transition{T,F<span class="op">&lt;:</span><span class="dt">AbstractFloat</span>}</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    θ<span class="op">::</span><span class="dt">T</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    lp<span class="op">::</span><span class="dt">F</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Transition{T,F<span class="op">&lt;:</span><span class="dt">AbstractFloat</span>}</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    θ<span class="op">::</span><span class="dt">T</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    lp<span class="op">::</span><span class="dt">F</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>It also <a href="https://github.com/TuringLang/Turing.jl/blob/master/src/inference/Inference.jl#L108">contains</a> a constructor that builds an instance of <code>Transition</code> from an instance <code>spl</code> of <code>Sampler</code>: <code>\theta</code> is <code>spl.state.vi</code> converted to a <code>namedtuple</code>, and <code>lp</code> is <code>getlogp(spl.state.vi)</code>. <code>is.jl</code> uses this default constructor at the end of the <code>step!</code> function <a href="https://github.com/TuringLang/Turing.jl/blob/master/src/inference/is.jl#L58">here</a>.</p>
+<p>It also <a href="https://github.com/TuringLang/Turing.jl/blob/master/src/inference/Inference.jl#L108">contains</a> a constructor that builds an instance of <code>Transition</code> from an instance <code>spl</code> of <code>Sampler</code>: <span class="math inline">\(\theta\)</span> is <code>spl.state.vi</code> converted to a <code>namedtuple</code>, and <code>lp</code> is <code>getlogp(spl.state.vi)</code>. <code>is.jl</code> uses this default constructor at the end of the <code>step!</code> function <a href="https://github.com/TuringLang/Turing.jl/blob/master/src/inference/is.jl#L58">here</a>.</p>
 </section>
 <section id="how-sample-works" class="level3">
 <h3 class="anchored" data-anchor-id="how-sample-works">How <code>sample</code> works</h3>
@@ -806,18 +868,22 @@ Quantiles
 <li><code>sample_end!</code> to perform operations once all samples have been obtained</li>
 <li><code>bundle_samples</code> to convert a vector of transitions into a more palatable type, for instance a <code>Chain</code>.</li>
 </ul>
-<p>You can of course implement all of these functions, but <code>AbstractMCMC</code> as well as Turing also provide default implementations for simple cases. For instance, importance sampling uses the default implementations of <code>sample_init!</code> and <code>bundle_samples</code>, which is why you don’t see code for them inside <code>is.jl</code>.</p>
+<p>You can, of course, implement all of these functions, but <code>AbstractMCMC</code> as well as Turing, also provide default implementations for simple cases. For instance, importance sampling uses the default implementations of <code>sample_init!</code> and <code>bundle_samples</code>, which is why you don’t see code for them inside <code>is.jl</code>.</p>
 </section>
 </section>
 <section id="overload-assume-and-observe" class="level2">
 <h2 class="anchored" data-anchor-id="overload-assume-and-observe">3. Overload assume and observe</h2>
-<p>The functions mentioned above, such as <code>sample_init!</code>, <code>step!</code>, etc., must of course use information about the model in order to generate samples! In particular, these functions may need <strong>samples from distributions</strong> defined in the model, or to <strong>evaluate the density of these distributions</strong> at some values of the corresponding parameters or observations.</p>
+<p>The functions mentioned above, such as <code>sample_init!</code>, <code>step!</code>, etc., must, of course, use information about the model in order to generate samples! In particular, these functions may need <strong>samples from distributions</strong> defined in the model or to <strong>evaluate the density of these distributions</strong> at some values of the corresponding parameters or observations.</p>
 <p>For an example of the former, consider <strong>Importance Sampling</strong> as defined in <code>is.jl</code>. This implementation of Importance Sampling uses the model prior distribution as a proposal distribution, and therefore requires <strong>samples from the prior distribution</strong> of the model. Another example is <strong>Approximate Bayesian Computation</strong>, which requires multiple <strong>samples from the model prior and likelihood distributions</strong> in order to generate a single sample.</p>
 <p>An example of the latter is the <strong>Metropolis-Hastings</strong> algorithm. At every step of sampling from a target posterior</p>
-<pre class="cell-bg"><code>p(\theta \mid x_{\text{obs}}),</code></pre>
+<p><span class="math display">\[
+p(\theta \mid x_{\text{obs}}),
+\]</span></p>
 <p>in order to compute the acceptance ratio, you need to <strong>evaluate the model joint density</strong></p>
-<pre class="cell-bg"><code>p\left(\theta_{\text{prop}}, x_{\text{obs}}\right)</code></pre>
-<p>with <code>\theta_{\text{prop}}</code> a sample from the proposal and <code>x_{\text{obs}}</code> the observed data.</p>
+<p><span class="math display">\[
+p\left(\theta_{\text{prop}}, x_{\text{obs}}\right)
+\]</span></p>
+<p>with <span class="math inline">\(\theta_{\text{prop}}\)</span> a sample from the proposal and <span class="math inline">\(x_{\text{obs}}\)</span> the observed data.</p>
 <p>This begs the question: how can these functions access model information during sampling? Recall that the model is stored as an instance <code>m</code> of <code>Model</code>. One of the attributes of <code>m</code> is the model evaluation function <code>m.f</code>, which is built by compiling the <code>@model</code> macro. Executing <code>f</code> runs the tilde statements of the model in order, and adds model information to the sampler (the instance of <code>Sampler</code> that stores information about the ongoing sampling process) at each step (see <a href="https://turinglang.org/dev/docs/for-developers/compiler">here</a> for more information about how the <code>@model</code> macro is compiled). The DynamicPPL functions <code>assume</code> and <code>observe</code> determine what kind of information to add to the sampler for every tilde statement.</p>
 <p>Consider an instance <code>m</code> of <code>Model</code> and a sampler <code>spl</code>, with associated <code>VarInfo</code> <code>vi = spl.state.vi</code>. At some point during the sampling process, an AbstractMCMC function such as <code>step!</code> calls <code>m(vi, ...)</code>, which calls the model evaluation function <code>m.f(vi, ...)</code>.</p>
 <ul>
@@ -831,18 +897,18 @@ Quantiles
 </ul>
 <p>Here’s what <code>assume</code> looks like for Importance Sampling:</p>
 <div id="22" class="cell" data-execution_count="0">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> DynamicPPL.<span class="fu">assume</span>(rng, spl<span class="op">::</span><span class="dt">Sampler{&lt;:IS}</span>, dist<span class="op">::</span><span class="dt">Distribution</span>, vn<span class="op">::</span><span class="dt">VarName</span>, vi)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> <span class="fu">rand</span>(rng, dist)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">push!</span>(vi, vn, r, dist, spl)</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> r, <span class="fl">0</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> DynamicPPL.<span class="fu">assume</span>(rng, spl<span class="op">::</span><span class="dt">Sampler{&lt;:IS}</span>, dist<span class="op">::</span><span class="dt">Distribution</span>, vn<span class="op">::</span><span class="dt">VarName</span>, vi)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> <span class="fu">rand</span>(rng, dist)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">push!</span>(vi, vn, r, dist, spl)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> r, <span class="fl">0</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The function first generates a sample <code>r</code> from the distribution <code>dist</code> (the right hand side of the tilde statement). It then adds <code>r</code> to <code>vi</code>, and returns <code>r</code> and 0.</p>
 <p>The <code>observe</code> function is even simpler:</p>
 <div id="24" class="cell" data-execution_count="0">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> DynamicPPL.<span class="fu">observe</span>(spl<span class="op">::</span><span class="dt">Sampler{&lt;:IS}</span>, dist<span class="op">::</span><span class="dt">Distribution</span>, value, vi)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">logpdf</span>(dist, value)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> DynamicPPL.<span class="fu">observe</span>(spl<span class="op">::</span><span class="dt">Sampler{&lt;:IS}</span>, dist<span class="op">::</span><span class="dt">Distribution</span>, value, vi)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">logpdf</span>(dist, value)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>It simply returns the density (in the discrete case, the probability) of the observed value under the distribution <code>dist</code>.</p>
 </section>
@@ -850,15 +916,15 @@ Quantiles
 <h2 class="anchored" data-anchor-id="summary-importance-sampling-step-by-step">4. Summary: Importance Sampling step by step</h2>
 <p>We focus on the AbstractMCMC functions that are overridden in <code>is.jl</code> and executed inside <code>mcmcsample</code>: <code>step!</code>, which is called <code>n_samples</code> times, and <code>sample_end!</code>, which is executed once after those <code>n_samples</code> iterations.</p>
 <ul>
-<li><p>During the <code>i</code>-th iteration, <code>step!</code> does 3 things:</p>
+<li><p>During the <span class="math inline">\(i\)</span>-th iteration, <code>step!</code> does 3 things:</p>
 <ul>
 <li><p><code>empty!!(spl.state.vi)</code>: remove information about the previous sample from the sampler’s <code>VarInfo</code></p></li>
 <li><p><code>model(rng, spl.state.vi, spl)</code>: call the model evaluation function</p>
 <ul>
-<li><p>calls to <code>assume</code> add the samples from the prior <code>s_i</code> and <code>m_i</code> to <code>spl.state.vi</code></p></li>
-<li><p>calls to both <code>assume</code> or <code>observe</code> are followed by the line <code>acclogp!!(vi, lp)</code>, where <code>lp</code> is an output of <code>assume</code> and <code>observe</code></p></li>
+<li><p>calls to <code>assume</code> add the samples from the prior <span class="math inline">\(s_i\)</span> and <span class="math inline">\(m_i\)</span> to <code>spl.state.vi</code></p></li>
+<li><p>calls to <code>assume</code> or <code>observe</code> are followed by the line <code>acclogp!!(vi, lp)</code>, where <code>lp</code> is an output of <code>assume</code> and <code>observe</code></p></li>
 <li><p><code>lp</code> is set to 0 after <code>assume</code>, and to the value of the density at the observation after <code>observe</code></p></li>
-<li><p>when all the tilde statements have been covered, <code>spl.state.vi.logp[]</code> is the sum of the <code>lp</code>, i.e., the likelihood <code>\log p(x, y \mid s_i, m_i) = \log p(x \mid s_i, m_i) + \log p(y \mid s_i, m_i)</code> of the observations given the latent variable samples <code>s_i</code> and <code>m_i</code>.</p></li>
+<li><p>When all the tilde statements have been covered, <code>spl.state.vi.logp[]</code> is the sum of the <code>lp</code>, i.e., the likelihood <span class="math inline">\(\log p(x, y \mid s_i, m_i) = \log p(x \mid s_i, m_i) + \log p(y \mid s_i, m_i)\)</span> of the observations given the latent variable samples <span class="math inline">\(s_i\)</span> and <span class="math inline">\(m_i\)</span>.</p></li>
 </ul></li>
 <li><p><code>return Transition(spl)</code>: build a transition from the sampler, and return that transition</p>
 <ul>
@@ -866,9 +932,9 @@ Quantiles
 <li><p>the <code>lp</code> field contains the likelihood <code>spl.state.vi.logp[]</code></p></li>
 </ul></li>
 </ul></li>
-<li><p>When the, <code>n_samples</code> iterations are completed, <code>sample_end!</code> fills the <code>final_logevidence</code> field of <code>spl.state</code></p>
+<li><p>When the <code>n_samples</code> iterations are completed, <code>sample_end!</code> fills the <code>final_logevidence</code> field of <code>spl.state</code></p>
 <ul>
-<li>it simply takes the logarithm of the average of the sample weights, using the log weights for numerical stability</li>
+<li>It simply takes the logarithm of the average of the sample weights, using the log weights for numerical stability</li>
 </ul></li>
 </ul>
 
@@ -1316,7 +1382,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/TuringLang/TuringTutorials/edit/master/tutorials/docs-04-for-developers-abstractmcmc-turing/index.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/TuringLang/TuringTutorials/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/TuringLang/docs/edit/master/tutorials/docs-04-for-developers-abstractmcmc-turing/index.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/TuringLang/docs/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
