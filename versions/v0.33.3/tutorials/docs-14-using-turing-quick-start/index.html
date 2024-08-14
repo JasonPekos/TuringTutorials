@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Quick Start – Turing.jl</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../tutorials/docs-12-using-turing-guide/index.html" rel="next">
+<link href="../../tutorials/docs-00-getting-started/index.html" rel="prev">
+<link href="../../assets/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<style>
+  a {
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+
+<link rel="stylesheet" href="../../theming/styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="https://turinglang.org/" class="navbar-brand navbar-brand-logo">
+    <img src="../../assets/images/turing-logo.svg" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="https://turinglang.org/">
+    <span class="navbar-title">Turing.jl</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../tutorials/docs-00-getting-started/"> 
+<span class="menu-text">Get Started</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../tutorials/00-introduction/"> 
+<span class="menu-text">Tutorials</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://turinglang.org/library/"> 
+<span class="menu-text">Libraries</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://turinglang.org/news/"> 
+<span class="menu-text">News</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://turinglang.org/team/"> 
+<span class="menu-text">Team</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-v0.33" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">v0.33</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-v0.33">    
+        <li>
+    <a class="dropdown-item" href="https://turinglang.org/docs/changelog.html">
+ <span class="dropdown-text">Changelog</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://turinglang.org/docs/versions.html">
+ <span class="dropdown-text">All Versions</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+    <a href="https://x.com/TuringLang" title="Turing Twitter" class="quarto-navigation-tool px-1" aria-label="Turing Twitter"><i class="bi bi-twitter"></i></a>
+    <a href="https://github.com/TuringLang/Turing.jl" title="Turing GitHub" class="quarto-navigation-tool px-1" aria-label="Turing GitHub"><i class="bi bi-github"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Documentation</li><li class="breadcrumb-item"><a href="../../tutorials/docs-00-getting-started/index.html">Using Turing - Modelling Syntax and Interface</a></li><li class="breadcrumb-item"><a href="../../tutorials/docs-14-using-turing-quick-start/index.html">Quick Start</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Documentation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Using Turing - Modelling Syntax and Interface</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/docs-00-getting-started/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Getting Started</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/docs-14-using-turing-quick-start/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Quick Start</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/docs-12-using-turing-guide/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Guide</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/docs-17-mode-estimation/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mode Estimation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/docs-09-using-turing-advanced/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Advanced Usage</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/docs-10-using-turing-autodiff/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Automatic Differentiation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/docs-13-using-turing-performance-tips/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Performance Tips</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/docs-11-using-turing-dynamichmc/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using DynamicHMC</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/docs-15-using-turing-sampler-viz/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sampler Visualization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/docs-16-using-turing-external-samplers/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">External Samplers</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Using Turing - Tutorials</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/00-introduction/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Turing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/01-gaussian-mixture-model/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Gaussian Mixture Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/02-logistic-regression/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayesian Logistic Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/03-bayesian-neural-network/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayesian Neural Networks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/04-hidden-markov-model/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hidden Markov Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/05-linear-regression/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/06-infinite-mixture-model/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Infinite Mixture Model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/07-poisson-regression/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayesian Poisson Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/08-multinomial-logistic-regression/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Multinomial Logistic Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/09-variational-inference/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variational Inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/10-bayesian-differential-equations/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayesian Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/11-probabilistic-pca/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Probabilistic PCA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/13-seasonal-time-series/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayesian Time Series Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/15-gaussian-processes/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Gaussian Processes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/12-gplvm/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Gaussian Process Latent Variable Models</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">For Developers (PPL)</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/docs-01-contributing-guide/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to Contribute</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/docs-05-for-developers-compiler/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Turing Compiler Design</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/14-minituring/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A Mini Turing Implementation I: Compiler</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/16-contexts/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A Mini Turing Implementation II: Contexts</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/docs-06-for-developers-interface/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Interface Guide</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">For Developers (Inference)</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/docs-04-for-developers-abstractmcmc-turing/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How Turing implements AbstractMCMC</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/docs-07-for-developers-variational-inference/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variational Inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/docs-17-implementing-samplers/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Implementing Samplers</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of Contents</h2>
+   
+  <ul>
+  <li><a href="#import-libraries" id="toc-import-libraries" class="nav-link active" data-scroll-target="#import-libraries">Import Libraries</a></li>
+  <li><a href="#declare-turing-model" id="toc-declare-turing-model" class="nav-link" data-scroll-target="#declare-turing-model">Declare Turing Model</a></li>
+  <li><a href="#setting-hmc-sampler" id="toc-setting-hmc-sampler" class="nav-link" data-scroll-target="#setting-hmc-sampler">Setting HMC Sampler</a></li>
+  <li><a href="#plot-a-summary" id="toc-plot-a-summary" class="nav-link" data-scroll-target="#plot-a-summary">Plot a summary</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/TuringLang/docs/edit/master/tutorials/docs-14-using-turing-quick-start/index.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/TuringLang/docs/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Documentation</li><li class="breadcrumb-item"><a href="../../tutorials/docs-00-getting-started/index.html">Using Turing - Modelling Syntax and Interface</a></li><li class="breadcrumb-item"><a href="../../tutorials/docs-14-using-turing-quick-start/index.html">Quick Start</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Probabilistic Programming in Thirty Seconds</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>If you are already well-versed in probabilistic programming and want to take a quick look at how Turing’s syntax works or otherwise just want a model to start with, we have provided a complete Bayesian coin-flipping model below.</p>
+<p>This example can be run wherever you have Julia installed (see <a href="../../tutorials/docs-00-getting-started/index.html">Getting Started</a>, but you will need to install the packages <code>Turing</code> and <code>StatsPlots</code> if you have not done so already.</p>
+<p>This is an excerpt from a more formal example which can be found <a href="../../tutorials/00-introduction/index.html">here</a>.</p>
+<section id="import-libraries" class="level2">
+<h2 class="anchored" data-anchor-id="import-libraries">Import Libraries</h2>
+<div id="4" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import libraries.</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Turing</span>, <span class="bu">StatsPlots</span>, <span class="bu">Random</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="6" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the true probability of heads in a coin.</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>p_true <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterate from having seen 0 observations to 100 observations.</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>Ns <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>0:100</code></pre>
+</div>
+</div>
+<div id="8" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw data from a Bernoulli distribution, i.e. draw heads or tails.</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">Random</span>.<span class="fu">seed!</span>(<span class="fl">12</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> <span class="fu">rand</span>(<span class="fu">Bernoulli</span>(p_true), <span class="fu">last</span>(Ns))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>100-element Vector{Bool}:
+ 1
+ 0
+ 0
+ 0
+ 1
+ 1
+ 1
+ 0
+ 1
+ 0
+ ⋮
+ 0
+ 1
+ 0
+ 0
+ 1
+ 0
+ 0
+ 0
+ 1</code></pre>
+</div>
+</div>
+</section>
+<section id="declare-turing-model" class="level2">
+<h2 class="anchored" data-anchor-id="declare-turing-model">Declare Turing Model</h2>
+<div id="10" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Declare our Turing model.</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="pp">@model</span> <span class="kw">function</span> <span class="fu">coinflip</span>(y)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Our prior belief about the probability of heads in a coin.</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    p <span class="op">~</span> <span class="fu">Beta</span>(<span class="fl">1</span>, <span class="fl">1</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># The number of observations.</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    N <span class="op">=</span> <span class="fu">length</span>(y)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> n <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>N</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Heads or tails of a coin are drawn from a Bernoulli distribution.</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        y[n] <span class="op">~</span> <span class="fu">Bernoulli</span>(p)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>coinflip (generic function with 2 methods)</code></pre>
+</div>
+</div>
+</section>
+<section id="setting-hmc-sampler" class="level2">
+<h2 class="anchored" data-anchor-id="setting-hmc-sampler">Setting HMC Sampler</h2>
+<div id="12" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Settings of the Hamiltonian Monte Carlo (HMC) sampler.</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>iterations <span class="op">=</span> <span class="fl">1000</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>ϵ <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>τ <span class="op">=</span> <span class="fl">10</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Start sampling.</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>chain <span class="op">=</span> <span class="fu">sample</span>(<span class="fu">coinflip</span>(data), <span class="fu">HMC</span>(ϵ, τ), iterations, progress<span class="op">=</span><span class="cn">false</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>Chains MCMC chain (1000×11×1 Array{Float64, 3}):
+
+Iterations        = 1:1:1000
+Number of chains  = 1
+Samples per chain = 1000
+Wall duration     = 3.39 seconds
+Compute duration  = 3.39 seconds
+parameters        = p
+internals         = lp, n_steps, is_accept, acceptance_rate, log_density, hamiltonian_energy, hamiltonian_energy_error, numerical_error, step_size, nom_step_size
+
+Summary Statistics
+  parameters      mean       std      mcse    ess_bulk   ess_tail      rhat    ⋯
+      Symbol   Float64   Float64   Float64     Float64    Float64   Float64    ⋯
+
+           p    0.4315    0.0497    0.0009   3000.0000   456.1728    0.9994    ⋯
+                                                                1 column omitted
+
+Quantiles
+  parameters      2.5%     25.0%     50.0%     75.0%     97.5%
+      Symbol   Float64   Float64   Float64   Float64   Float64
+
+           p    0.3344    0.3981    0.4316    0.4651    0.5279</code></pre>
+</div>
+</div>
+</section>
+<section id="plot-a-summary" class="level2">
+<h2 class="anchored" data-anchor-id="plot-a-summary">Plot a summary</h2>
+<div id="14" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a summary of the sampling process for the parameter p, i.e. the probability of heads in a coin.</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">histogram</span>(chain[<span class="op">:</span>p])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<!--?xml version="1.0" encoding="utf-8"?-->
+<svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="672" height="480" viewbox="0 0 2688 1920">
+<defs>
+  <clippath id="clip740">
+    <rect x="0" y="0" width="2688" height="1920"></rect>
+  </clippath>
+</defs>
+<path clip-path="url(#clip740)" d="M0 1920 L2688 1920 L2688 0 L0 0  Z" fill="#ffffff" fill-rule="evenodd" fill-opacity="1"></path>
+<defs>
+  <clippath id="clip741">
+    <rect x="537" y="0" width="1883" height="1883"></rect>
+  </clippath>
+</defs>
+<path clip-path="url(#clip740)" d="M172.001 1800.78 L2640.76 1800.78 L2640.76 47.2441 L172.001 47.2441  Z" fill="#ffffff" fill-rule="evenodd" fill-opacity="1"></path>
+<defs>
+  <clippath id="clip742">
+    <rect x="172" y="47" width="2470" height="1755"></rect>
+  </clippath>
+</defs>
+<polyline clip-path="url(#clip742)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="203.159,1800.78 203.159,47.2441 "></polyline>
+<polyline clip-path="url(#clip742)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="726.298,1800.78 726.298,47.2441 "></polyline>
+<polyline clip-path="url(#clip742)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="1249.44,1800.78 1249.44,47.2441 "></polyline>
+<polyline clip-path="url(#clip742)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="1772.58,1800.78 1772.58,47.2441 "></polyline>
+<polyline clip-path="url(#clip742)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="2295.71,1800.78 2295.71,47.2441 "></polyline>
+<polyline clip-path="url(#clip740)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="172.001,1800.78 2640.76,1800.78 "></polyline>
+<polyline clip-path="url(#clip740)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="203.159,1800.78 203.159,1781.88 "></polyline>
+<polyline clip-path="url(#clip740)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="726.298,1800.78 726.298,1781.88 "></polyline>
+<polyline clip-path="url(#clip740)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="1249.44,1800.78 1249.44,1781.88 "></polyline>
+<polyline clip-path="url(#clip740)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="1772.58,1800.78 1772.58,1781.88 "></polyline>
+<polyline clip-path="url(#clip740)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="2295.71,1800.78 2295.71,1781.88 "></polyline>
+<path clip-path="url(#clip740)" d="M181.342 1834 Q177.731 1834 175.903 1837.57 Q174.097 1841.11 174.097 1848.24 Q174.097 1855.34 175.903 1858.91 Q177.731 1862.45 181.342 1862.45 Q184.977 1862.45 186.782 1858.91 Q188.611 1855.34 188.611 1848.24 Q188.611 1841.11 186.782 1837.57 Q184.977 1834 181.342 1834 M181.342 1830.3 Q187.153 1830.3 190.208 1834.9 Q193.287 1839.49 193.287 1848.24 Q193.287 1856.96 190.208 1861.57 Q187.153 1866.15 181.342 1866.15 Q175.532 1866.15 172.454 1861.57 Q169.398 1856.96 169.398 1848.24 Q169.398 1839.49 172.454 1834.9 Q175.532 1830.3 181.342 1830.3 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip740)" d="M201.504 1859.6 L206.389 1859.6 L206.389 1865.48 L201.504 1865.48 L201.504 1859.6 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip740)" d="M220.601 1861.55 L236.921 1861.55 L236.921 1865.48 L214.977 1865.48 L214.977 1861.55 Q217.639 1858.79 222.222 1854.16 Q226.828 1849.51 228.009 1848.17 Q230.254 1845.65 231.134 1843.91 Q232.037 1842.15 232.037 1840.46 Q232.037 1837.71 230.092 1835.97 Q228.171 1834.23 225.069 1834.23 Q222.87 1834.23 220.416 1835 Q217.986 1835.76 215.208 1837.31 L215.208 1832.59 Q218.032 1831.46 220.486 1830.88 Q222.939 1830.3 224.976 1830.3 Q230.347 1830.3 233.541 1832.98 Q236.736 1835.67 236.736 1840.16 Q236.736 1842.29 235.925 1844.21 Q235.138 1846.11 233.032 1848.7 Q232.453 1849.37 229.351 1852.59 Q226.25 1855.78 220.601 1861.55 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip740)" d="M704.007 1834 Q700.396 1834 698.567 1837.57 Q696.761 1841.11 696.761 1848.24 Q696.761 1855.34 698.567 1858.91 Q700.396 1862.45 704.007 1862.45 Q707.641 1862.45 709.446 1858.91 Q711.275 1855.34 711.275 1848.24 Q711.275 1841.11 709.446 1837.57 Q707.641 1834 704.007 1834 M704.007 1830.3 Q709.817 1830.3 712.872 1834.9 Q715.951 1839.49 715.951 1848.24 Q715.951 1856.96 712.872 1861.57 Q709.817 1866.15 704.007 1866.15 Q698.197 1866.15 695.118 1861.57 Q692.062 1856.96 692.062 1848.24 Q692.062 1839.49 695.118 1834.9 Q698.197 1830.3 704.007 1830.3 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip740)" d="M724.169 1859.6 L729.053 1859.6 L729.053 1865.48 L724.169 1865.48 L724.169 1859.6 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip740)" d="M753.405 1846.85 Q756.761 1847.57 758.636 1849.84 Q760.534 1852.1 760.534 1855.44 Q760.534 1860.55 757.016 1863.35 Q753.497 1866.15 747.016 1866.15 Q744.84 1866.15 742.525 1865.71 Q740.233 1865.3 737.78 1864.44 L737.78 1859.93 Q739.724 1861.06 742.039 1861.64 Q744.354 1862.22 746.877 1862.22 Q751.275 1862.22 753.567 1860.48 Q755.881 1858.75 755.881 1855.44 Q755.881 1852.38 753.729 1850.67 Q751.599 1848.93 747.78 1848.93 L743.752 1848.93 L743.752 1845.09 L747.965 1845.09 Q751.414 1845.09 753.243 1843.72 Q755.071 1842.34 755.071 1839.74 Q755.071 1837.08 753.173 1835.67 Q751.298 1834.23 747.78 1834.23 Q745.858 1834.23 743.659 1834.65 Q741.46 1835.07 738.821 1835.95 L738.821 1831.78 Q741.483 1831.04 743.798 1830.67 Q746.136 1830.3 748.196 1830.3 Q753.52 1830.3 756.622 1832.73 Q759.724 1835.14 759.724 1839.26 Q759.724 1842.13 758.08 1844.12 Q756.437 1846.09 753.405 1846.85 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip740)" d="M1226.58 1834 Q1222.97 1834 1221.14 1837.57 Q1219.33 1841.11 1219.33 1848.24 Q1219.33 1855.34 1221.14 1858.91 Q1222.97 1862.45 1226.58 1862.45 Q1230.21 1862.45 1232.02 1858.91 Q1233.85 1855.34 1233.85 1848.24 Q1233.85 1841.11 1232.02 1837.57 Q1230.21 1834 1226.58 1834 M1226.58 1830.3 Q1232.39 1830.3 1235.44 1834.9 Q1238.52 1839.49 1238.52 1848.24 Q1238.52 1856.96 1235.44 1861.57 Q1232.39 1866.15 1226.58 1866.15 Q1220.77 1866.15 1217.69 1861.57 Q1214.63 1856.96 1214.63 1848.24 Q1214.63 1839.49 1217.69 1834.9 Q1220.77 1830.3 1226.58 1830.3 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip740)" d="M1246.74 1859.6 L1251.62 1859.6 L1251.62 1865.48 L1246.74 1865.48 L1246.74 1859.6 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip740)" d="M1274.66 1835 L1262.85 1853.45 L1274.66 1853.45 L1274.66 1835 M1273.43 1830.92 L1279.31 1830.92 L1279.31 1853.45 L1284.24 1853.45 L1284.24 1857.34 L1279.31 1857.34 L1279.31 1865.48 L1274.66 1865.48 L1274.66 1857.34 L1259.05 1857.34 L1259.05 1852.82 L1273.43 1830.92 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip740)" d="M1750.46 1834 Q1746.85 1834 1745.02 1837.57 Q1743.21 1841.11 1743.21 1848.24 Q1743.21 1855.34 1745.02 1858.91 Q1746.85 1862.45 1750.46 1862.45 Q1754.09 1862.45 1755.9 1858.91 Q1757.73 1855.34 1757.73 1848.24 Q1757.73 1841.11 1755.9 1837.57 Q1754.09 1834 1750.46 1834 M1750.46 1830.3 Q1756.27 1830.3 1759.32 1834.9 Q1762.4 1839.49 1762.4 1848.24 Q1762.4 1856.96 1759.32 1861.57 Q1756.27 1866.15 1750.46 1866.15 Q1744.65 1866.15 1741.57 1861.57 Q1738.51 1856.96 1738.51 1848.24 Q1738.51 1839.49 1741.57 1834.9 Q1744.65 1830.3 1750.46 1830.3 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip740)" d="M1770.62 1859.6 L1775.5 1859.6 L1775.5 1865.48 L1770.62 1865.48 L1770.62 1859.6 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip740)" d="M1785.74 1830.92 L1804.09 1830.92 L1804.09 1834.86 L1790.02 1834.86 L1790.02 1843.33 Q1791.04 1842.98 1792.05 1842.82 Q1793.07 1842.64 1794.09 1842.64 Q1799.88 1842.64 1803.26 1845.81 Q1806.64 1848.98 1806.64 1854.4 Q1806.64 1859.97 1803.17 1863.08 Q1799.69 1866.15 1793.37 1866.15 Q1791.2 1866.15 1788.93 1865.78 Q1786.68 1865.41 1784.28 1864.67 L1784.28 1859.97 Q1786.36 1861.11 1788.58 1861.66 Q1790.8 1862.22 1793.28 1862.22 Q1797.29 1862.22 1799.62 1860.11 Q1801.96 1858.01 1801.96 1854.4 Q1801.96 1850.78 1799.62 1848.68 Q1797.29 1846.57 1793.28 1846.57 Q1791.41 1846.57 1789.53 1846.99 Q1787.68 1847.4 1785.74 1848.28 L1785.74 1830.92 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip740)" d="M2273.02 1834 Q2269.41 1834 2267.58 1837.57 Q2265.77 1841.11 2265.77 1848.24 Q2265.77 1855.34 2267.58 1858.91 Q2269.41 1862.45 2273.02 1862.45 Q2276.65 1862.45 2278.46 1858.91 Q2280.29 1855.34 2280.29 1848.24 Q2280.29 1841.11 2278.46 1837.57 Q2276.65 1834 2273.02 1834 M2273.02 1830.3 Q2278.83 1830.3 2281.88 1834.9 Q2284.96 1839.49 2284.96 1848.24 Q2284.96 1856.96 2281.88 1861.57 Q2278.83 1866.15 2273.02 1866.15 Q2267.21 1866.15 2264.13 1861.57 Q2261.07 1856.96 2261.07 1848.24 Q2261.07 1839.49 2264.13 1834.9 Q2267.21 1830.3 2273.02 1830.3 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip740)" d="M2293.18 1859.6 L2298.06 1859.6 L2298.06 1865.48 L2293.18 1865.48 L2293.18 1859.6 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip740)" d="M2318.83 1846.34 Q2315.68 1846.34 2313.83 1848.49 Q2312 1850.65 2312 1854.4 Q2312 1858.12 2313.83 1860.3 Q2315.68 1862.45 2318.83 1862.45 Q2321.98 1862.45 2323.8 1860.3 Q2325.66 1858.12 2325.66 1854.4 Q2325.66 1850.65 2323.8 1848.49 Q2321.98 1846.34 2318.83 1846.34 M2328.11 1831.69 L2328.11 1835.95 Q2326.35 1835.11 2324.55 1834.67 Q2322.76 1834.23 2321 1834.23 Q2316.37 1834.23 2313.92 1837.36 Q2311.49 1840.48 2311.14 1846.8 Q2312.51 1844.79 2314.57 1843.72 Q2316.63 1842.64 2319.11 1842.64 Q2324.31 1842.64 2327.32 1845.81 Q2330.36 1848.96 2330.36 1854.4 Q2330.36 1859.72 2327.21 1862.94 Q2324.06 1866.15 2318.83 1866.15 Q2312.83 1866.15 2309.66 1861.57 Q2306.49 1856.96 2306.49 1848.24 Q2306.49 1840.04 2310.38 1835.18 Q2314.27 1830.3 2320.82 1830.3 Q2322.58 1830.3 2324.36 1830.65 Q2326.17 1830.99 2328.11 1831.69 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><polyline clip-path="url(#clip742)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="172.001,1800.78 2640.76,1800.78 "></polyline>
+<polyline clip-path="url(#clip742)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="172.001,1256.2 2640.76,1256.2 "></polyline>
+<polyline clip-path="url(#clip742)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="172.001,711.627 2640.76,711.627 "></polyline>
+<polyline clip-path="url(#clip742)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="172.001,167.051 2640.76,167.051 "></polyline>
+<polyline clip-path="url(#clip740)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="172.001,1800.78 172.001,47.2441 "></polyline>
+<polyline clip-path="url(#clip740)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="172.001,1800.78 190.899,1800.78 "></polyline>
+<polyline clip-path="url(#clip740)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="172.001,1256.2 190.899,1256.2 "></polyline>
+<polyline clip-path="url(#clip740)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="172.001,711.627 190.899,711.627 "></polyline>
+<polyline clip-path="url(#clip740)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="172.001,167.051 190.899,167.051 "></polyline>
+<path clip-path="url(#clip740)" d="M119.737 1786.58 Q116.126 1786.58 114.297 1790.14 Q112.492 1793.68 112.492 1800.81 Q112.492 1807.92 114.297 1811.49 Q116.126 1815.03 119.737 1815.03 Q123.371 1815.03 125.177 1811.49 Q127.005 1807.92 127.005 1800.81 Q127.005 1793.68 125.177 1790.14 Q123.371 1786.58 119.737 1786.58 M119.737 1782.87 Q125.547 1782.87 128.603 1787.48 Q131.681 1792.06 131.681 1800.81 Q131.681 1809.54 128.603 1814.15 Q125.547 1818.73 119.737 1818.73 Q113.927 1818.73 110.848 1814.15 Q107.793 1809.54 107.793 1800.81 Q107.793 1792.06 110.848 1787.48 Q113.927 1782.87 119.737 1782.87 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip740)" d="M79.6214 1238.92 L97.9778 1238.92 L97.9778 1242.86 L83.9038 1242.86 L83.9038 1251.33 Q84.9223 1250.98 85.9408 1250.82 Q86.9593 1250.64 87.9778 1250.64 Q93.7649 1250.64 97.1445 1253.81 Q100.524 1256.98 100.524 1262.4 Q100.524 1267.97 97.0519 1271.08 Q93.5797 1274.15 87.2603 1274.15 Q85.0843 1274.15 82.8158 1273.78 Q80.5705 1273.41 78.1631 1272.67 L78.1631 1267.97 Q80.2464 1269.11 82.4686 1269.66 Q84.6908 1270.22 87.1677 1270.22 Q91.1723 1270.22 93.5102 1268.11 Q95.8482 1266.01 95.8482 1262.4 Q95.8482 1258.78 93.5102 1256.68 Q91.1723 1254.57 87.1677 1254.57 Q85.2927 1254.57 83.4177 1254.99 Q81.5658 1255.4 79.6214 1256.28 L79.6214 1238.92 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip740)" d="M119.737 1242 Q116.126 1242 114.297 1245.57 Q112.492 1249.11 112.492 1256.24 Q112.492 1263.34 114.297 1266.91 Q116.126 1270.45 119.737 1270.45 Q123.371 1270.45 125.177 1266.91 Q127.005 1263.34 127.005 1256.24 Q127.005 1249.11 125.177 1245.57 Q123.371 1242 119.737 1242 M119.737 1238.3 Q125.547 1238.3 128.603 1242.9 Q131.681 1247.49 131.681 1256.24 Q131.681 1264.96 128.603 1269.57 Q125.547 1274.15 119.737 1274.15 Q113.927 1274.15 110.848 1269.57 Q107.793 1264.96 107.793 1256.24 Q107.793 1247.49 110.848 1242.9 Q113.927 1238.3 119.737 1238.3 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip740)" d="M50.2234 724.972 L57.8623 724.972 L57.8623 698.606 L49.5521 700.273 L49.5521 696.014 L57.816 694.347 L62.4919 694.347 L62.4919 724.972 L70.1307 724.972 L70.1307 728.907 L50.2234 728.907 L50.2234 724.972 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip740)" d="M89.5751 697.426 Q85.964 697.426 84.1353 700.99 Q82.3297 704.532 82.3297 711.662 Q82.3297 718.768 84.1353 722.333 Q85.964 725.875 89.5751 725.875 Q93.2093 725.875 95.0148 722.333 Q96.8435 718.768 96.8435 711.662 Q96.8435 704.532 95.0148 700.99 Q93.2093 697.426 89.5751 697.426 M89.5751 693.722 Q95.3852 693.722 98.4408 698.328 Q101.519 702.912 101.519 711.662 Q101.519 720.389 98.4408 724.995 Q95.3852 729.578 89.5751 729.578 Q83.7649 729.578 80.6862 724.995 Q77.6307 720.389 77.6307 711.662 Q77.6307 702.912 80.6862 698.328 Q83.7649 693.722 89.5751 693.722 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip740)" d="M119.737 697.426 Q116.126 697.426 114.297 700.99 Q112.492 704.532 112.492 711.662 Q112.492 718.768 114.297 722.333 Q116.126 725.875 119.737 725.875 Q123.371 725.875 125.177 722.333 Q127.005 718.768 127.005 711.662 Q127.005 704.532 125.177 700.99 Q123.371 697.426 119.737 697.426 M119.737 693.722 Q125.547 693.722 128.603 698.328 Q131.681 702.912 131.681 711.662 Q131.681 720.389 128.603 724.995 Q125.547 729.578 119.737 729.578 Q113.927 729.578 110.848 724.995 Q107.793 720.389 107.793 711.662 Q107.793 702.912 110.848 698.328 Q113.927 693.722 119.737 693.722 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip740)" d="M50.2234 180.396 L57.8623 180.396 L57.8623 154.03 L49.5521 155.697 L49.5521 151.438 L57.816 149.771 L62.4919 149.771 L62.4919 180.396 L70.1307 180.396 L70.1307 184.331 L50.2234 184.331 L50.2234 180.396 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip740)" d="M79.6214 149.771 L97.9778 149.771 L97.9778 153.706 L83.9038 153.706 L83.9038 162.178 Q84.9223 161.831 85.9408 161.669 Q86.9593 161.484 87.9778 161.484 Q93.7649 161.484 97.1445 164.655 Q100.524 167.826 100.524 173.243 Q100.524 178.822 97.0519 181.923 Q93.5797 185.002 87.2603 185.002 Q85.0843 185.002 82.8158 184.632 Q80.5705 184.261 78.1631 183.521 L78.1631 178.822 Q80.2464 179.956 82.4686 180.511 Q84.6908 181.067 87.1677 181.067 Q91.1723 181.067 93.5102 178.961 Q95.8482 176.854 95.8482 173.243 Q95.8482 169.632 93.5102 167.525 Q91.1723 165.419 87.1677 165.419 Q85.2927 165.419 83.4177 165.836 Q81.5658 166.252 79.6214 167.132 L79.6214 149.771 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip740)" d="M119.737 152.85 Q116.126 152.85 114.297 156.414 Q112.492 159.956 112.492 167.086 Q112.492 174.192 114.297 177.757 Q116.126 181.298 119.737 181.298 Q123.371 181.298 125.177 177.757 Q127.005 174.192 127.005 167.086 Q127.005 159.956 125.177 156.414 Q123.371 152.85 119.737 152.85 M119.737 149.146 Q125.547 149.146 128.603 153.752 Q131.681 158.336 131.681 167.086 Q131.681 175.812 128.603 180.419 Q125.547 185.002 119.737 185.002 Q113.927 185.002 110.848 180.419 Q107.793 175.812 107.793 167.086 Q107.793 158.336 110.848 153.752 Q113.927 149.146 119.737 149.146 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip742)" d="M307.787 1789.89 L307.787 1800.78 L412.415 1800.78 L412.415 1789.89 L307.787 1789.89 L307.787 1789.89  Z" fill="#009af9" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip742)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="307.787,1789.89 307.787,1800.78 412.415,1800.78 412.415,1789.89 307.787,1789.89 "></polyline>
+<path clip-path="url(#clip742)" d="M412.415 1800.78 L412.415 1800.78 L517.043 1800.78 L517.043 1800.78 L412.415 1800.78 L412.415 1800.78  Z" fill="#009af9" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip742)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="412.415,1800.78 412.415,1800.78 517.043,1800.78 412.415,1800.78 "></polyline>
+<path clip-path="url(#clip742)" d="M517.043 1800.78 L517.043 1800.78 L621.67 1800.78 L621.67 1800.78 L517.043 1800.78 L517.043 1800.78  Z" fill="#009af9" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip742)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="517.043,1800.78 517.043,1800.78 621.67,1800.78 517.043,1800.78 "></polyline>
+<path clip-path="url(#clip742)" d="M621.67 1779 L621.67 1800.78 L726.298 1800.78 L726.298 1779 L621.67 1779 L621.67 1779  Z" fill="#009af9" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip742)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="621.67,1779 621.67,1800.78 726.298,1800.78 726.298,1779 621.67,1779 "></polyline>
+<path clip-path="url(#clip742)" d="M726.298 1680.97 L726.298 1800.78 L830.926 1800.78 L830.926 1680.97 L726.298 1680.97 L726.298 1680.97  Z" fill="#009af9" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip742)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="726.298,1680.97 726.298,1800.78 830.926,1800.78 830.926,1680.97 726.298,1680.97 "></polyline>
+<path clip-path="url(#clip742)" d="M830.926 1604.73 L830.926 1800.78 L935.554 1800.78 L935.554 1604.73 L830.926 1604.73 L830.926 1604.73  Z" fill="#009af9" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip742)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="830.926,1604.73 830.926,1800.78 935.554,1800.78 935.554,1604.73 830.926,1604.73 "></polyline>
+<path clip-path="url(#clip742)" d="M935.554 1419.58 L935.554 1800.78 L1040.18 1800.78 L1040.18 1419.58 L935.554 1419.58 L935.554 1419.58  Z" fill="#009af9" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip742)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="935.554,1419.58 935.554,1800.78 1040.18,1800.78 1040.18,1419.58 935.554,1419.58 "></polyline>
+<path clip-path="url(#clip742)" d="M1040.18 907.674 L1040.18 1800.78 L1144.81 1800.78 L1144.81 907.674 L1040.18 907.674 L1040.18 907.674  Z" fill="#009af9" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip742)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="1040.18,907.674 1040.18,1800.78 1144.81,1800.78 1144.81,907.674 1040.18,907.674 "></polyline>
+<path clip-path="url(#clip742)" d="M1144.81 591.82 L1144.81 1800.78 L1249.44 1800.78 L1249.44 591.82 L1144.81 591.82 L1144.81 591.82  Z" fill="#009af9" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip742)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="1144.81,591.82 1144.81,1800.78 1249.44,1800.78 1249.44,591.82 1144.81,591.82 "></polyline>
+<path clip-path="url(#clip742)" d="M1249.44 188.834 L1249.44 1800.78 L1354.06 1800.78 L1354.06 188.834 L1249.44 188.834 L1249.44 188.834  Z" fill="#009af9" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip742)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="1249.44,188.834 1249.44,1800.78 1354.06,1800.78 1354.06,188.834 1249.44,188.834 "></polyline>
+<path clip-path="url(#clip742)" d="M1354.06 47.2441 L1354.06 1800.78 L1458.69 1800.78 L1458.69 47.2441 L1354.06 47.2441 L1354.06 47.2441  Z" fill="#009af9" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip742)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="1354.06,47.2441 1354.06,1800.78 1458.69,1800.78 1458.69,47.2441 1354.06,47.2441 "></polyline>
+<path clip-path="url(#clip742)" d="M1458.69 134.376 L1458.69 1800.78 L1563.32 1800.78 L1563.32 134.376 L1458.69 134.376 L1458.69 134.376  Z" fill="#009af9" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip742)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="1458.69,134.376 1458.69,1800.78 1563.32,1800.78 1563.32,134.376 1458.69,134.376 "></polyline>
+<path clip-path="url(#clip742)" d="M1563.32 591.82 L1563.32 1800.78 L1667.95 1800.78 L1667.95 591.82 L1563.32 591.82 L1563.32 591.82  Z" fill="#009af9" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip742)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="1563.32,591.82 1563.32,1800.78 1667.95,1800.78 1667.95,591.82 1563.32,591.82 "></polyline>
+<path clip-path="url(#clip742)" d="M1667.95 809.651 L1667.95 1800.78 L1772.58 1800.78 L1772.58 809.651 L1667.95 809.651 L1667.95 809.651  Z" fill="#009af9" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip742)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="1667.95,809.651 1667.95,1800.78 1772.58,1800.78 1772.58,809.651 1667.95,809.651 "></polyline>
+<path clip-path="url(#clip742)" d="M1772.58 1376.01 L1772.58 1800.78 L1877.2 1800.78 L1877.2 1376.01 L1772.58 1376.01 L1772.58 1376.01  Z" fill="#009af9" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip742)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="1772.58,1376.01 1772.58,1800.78 1877.2,1800.78 1877.2,1376.01 1772.58,1376.01 "></polyline>
+<path clip-path="url(#clip742)" d="M1877.2 1572.06 L1877.2 1800.78 L1981.83 1800.78 L1981.83 1572.06 L1877.2 1572.06 L1877.2 1572.06  Z" fill="#009af9" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip742)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="1877.2,1572.06 1877.2,1800.78 1981.83,1800.78 1981.83,1572.06 1877.2,1572.06 "></polyline>
+<path clip-path="url(#clip742)" d="M1981.83 1713.65 L1981.83 1800.78 L2086.46 1800.78 L2086.46 1713.65 L1981.83 1713.65 L1981.83 1713.65  Z" fill="#009af9" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip742)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="1981.83,1713.65 1981.83,1800.78 2086.46,1800.78 2086.46,1713.65 1981.83,1713.65 "></polyline>
+<path clip-path="url(#clip742)" d="M2086.46 1724.54 L2086.46 1800.78 L2191.09 1800.78 L2191.09 1724.54 L2086.46 1724.54 L2086.46 1724.54  Z" fill="#009af9" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip742)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="2086.46,1724.54 2086.46,1800.78 2191.09,1800.78 2191.09,1724.54 2086.46,1724.54 "></polyline>
+<path clip-path="url(#clip742)" d="M2191.09 1800.78 L2191.09 1800.78 L2295.71 1800.78 L2295.71 1800.78 L2191.09 1800.78 L2191.09 1800.78  Z" fill="#009af9" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip742)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="2191.09,1800.78 2191.09,1800.78 2295.71,1800.78 2191.09,1800.78 "></polyline>
+<path clip-path="url(#clip742)" d="M2295.71 1800.78 L2295.71 1800.78 L2400.34 1800.78 L2400.34 1800.78 L2295.71 1800.78 L2295.71 1800.78  Z" fill="#009af9" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip742)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="2295.71,1800.78 2295.71,1800.78 2400.34,1800.78 2295.71,1800.78 "></polyline>
+<path clip-path="url(#clip742)" d="M2400.34 1789.89 L2400.34 1800.78 L2504.97 1800.78 L2504.97 1789.89 L2400.34 1789.89 L2400.34 1789.89  Z" fill="#009af9" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip742)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="2400.34,1789.89 2400.34,1800.78 2504.97,1800.78 2504.97,1789.89 2400.34,1789.89 "></polyline>
+<circle clip-path="url(#clip742)" style="fill:#009af9; stroke:none; fill-opacity:0" cx="360.101" cy="1789.89" r="2"></circle>
+<circle clip-path="url(#clip742)" style="fill:#009af9; stroke:none; fill-opacity:0" cx="464.729" cy="1800.78" r="2"></circle>
+<circle clip-path="url(#clip742)" style="fill:#009af9; stroke:none; fill-opacity:0" cx="569.357" cy="1800.78" r="2"></circle>
+<circle clip-path="url(#clip742)" style="fill:#009af9; stroke:none; fill-opacity:0" cx="673.984" cy="1779" r="2"></circle>
+<circle clip-path="url(#clip742)" style="fill:#009af9; stroke:none; fill-opacity:0" cx="778.612" cy="1680.97" r="2"></circle>
+<circle clip-path="url(#clip742)" style="fill:#009af9; stroke:none; fill-opacity:0" cx="883.24" cy="1604.73" r="2"></circle>
+<circle clip-path="url(#clip742)" style="fill:#009af9; stroke:none; fill-opacity:0" cx="987.868" cy="1419.58" r="2"></circle>
+<circle clip-path="url(#clip742)" style="fill:#009af9; stroke:none; fill-opacity:0" cx="1092.5" cy="907.674" r="2"></circle>
+<circle clip-path="url(#clip742)" style="fill:#009af9; stroke:none; fill-opacity:0" cx="1197.12" cy="591.82" r="2"></circle>
+<circle clip-path="url(#clip742)" style="fill:#009af9; stroke:none; fill-opacity:0" cx="1301.75" cy="188.834" r="2"></circle>
+<circle clip-path="url(#clip742)" style="fill:#009af9; stroke:none; fill-opacity:0" cx="1406.38" cy="47.2441" r="2"></circle>
+<circle clip-path="url(#clip742)" style="fill:#009af9; stroke:none; fill-opacity:0" cx="1511.01" cy="134.376" r="2"></circle>
+<circle clip-path="url(#clip742)" style="fill:#009af9; stroke:none; fill-opacity:0" cx="1615.63" cy="591.82" r="2"></circle>
+<circle clip-path="url(#clip742)" style="fill:#009af9; stroke:none; fill-opacity:0" cx="1720.26" cy="809.651" r="2"></circle>
+<circle clip-path="url(#clip742)" style="fill:#009af9; stroke:none; fill-opacity:0" cx="1824.89" cy="1376.01" r="2"></circle>
+<circle clip-path="url(#clip742)" style="fill:#009af9; stroke:none; fill-opacity:0" cx="1929.52" cy="1572.06" r="2"></circle>
+<circle clip-path="url(#clip742)" style="fill:#009af9; stroke:none; fill-opacity:0" cx="2034.15" cy="1713.65" r="2"></circle>
+<circle clip-path="url(#clip742)" style="fill:#009af9; stroke:none; fill-opacity:0" cx="2138.77" cy="1724.54" r="2"></circle>
+<circle clip-path="url(#clip742)" style="fill:#009af9; stroke:none; fill-opacity:0" cx="2243.4" cy="1800.78" r="2"></circle>
+<circle clip-path="url(#clip742)" style="fill:#009af9; stroke:none; fill-opacity:0" cx="2348.03" cy="1800.78" r="2"></circle>
+<circle clip-path="url(#clip742)" style="fill:#009af9; stroke:none; fill-opacity:0" cx="2452.66" cy="1789.89" r="2"></circle>
+<path clip-path="url(#clip740)" d="M2259.16 209.375 L2558.46 209.375 L2558.46 105.695 L2259.16 105.695  Z" fill="#ffffff" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip740)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="2259.16,209.375 2558.46,209.375 2558.46,105.695 2259.16,105.695 2259.16,209.375 "></polyline>
+<path clip-path="url(#clip740)" d="M2286.59 178.271 L2451.17 178.271 L2451.17 136.799 L2286.59 136.799 L2286.59 178.271  Z" fill="#009af9" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip740)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="2286.59,178.271 2451.17,178.271 2451.17,136.799 2286.59,136.799 2286.59,178.271 "></polyline>
+<path clip-path="url(#clip740)" d="M2492.45 177.223 Q2490.64 181.852 2488.93 183.264 Q2487.21 184.676 2484.34 184.676 L2480.94 184.676 L2480.94 181.112 L2483.44 181.112 Q2485.2 181.112 2486.17 180.278 Q2487.14 179.445 2488.33 176.343 L2489.09 174.399 L2478.6 148.889 L2483.12 148.889 L2491.22 169.167 L2499.32 148.889 L2503.83 148.889 L2492.45 177.223 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip740)" d="M2511.13 170.88 L2518.77 170.88 L2518.77 144.515 L2510.45 146.181 L2510.45 141.922 L2518.72 140.255 L2523.39 140.255 L2523.39 170.88 L2531.03 170.88 L2531.03 174.815 L2511.13 174.815 L2511.13 170.88 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path></svg>
+</div>
+</div>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/turinglang\.org\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../tutorials/docs-00-getting-started/index.html" class="pagination-link" aria-label="Getting Started">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Getting Started</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../tutorials/docs-12-using-turing-guide/index.html" class="pagination-link" aria-label="Guide">
+        <span class="nav-page-text">Guide</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Turing is created by <a href="http://mlg.eng.cam.ac.uk/hong/" target="_blank">Hong Ge</a>, and lovingly maintained by the <a href="https://github.com/TuringLang/Turing.jl/graphs/contributors" target="_blank">core team</a> of volunteers. <br> The contents of this website are © 2024 under the terms of the <a href="https://github.com/TuringLang/Turing.jl/blob/master/LICENCE" target="_blank">MIT License</a>.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/TuringLang/docs/edit/master/tutorials/docs-14-using-turing-quick-start/index.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/TuringLang/docs/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://x.com/TuringLang">
+      <i class="bi bi-twitter" role="img" aria-label="Turing Twitter">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/TuringLang/Turing.jl">
+      <i class="bi bi-github" role="img" aria-label="Turing GitHub">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
